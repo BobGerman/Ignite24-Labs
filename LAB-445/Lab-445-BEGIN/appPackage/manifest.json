@@ -14,7 +14,7 @@
     "outline": "TreyResearch-blue-32.png"
   },
   "name": {
-    "short": "Trey Research E5 ${{APP_NAME_SUFFIX}}",
+    "short": "Trey Research ${{APP_NAME_SUFFIX}}",
     "full": "Trey Research consulting management"
   },
   "description": {
