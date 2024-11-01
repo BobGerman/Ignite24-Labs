@@ -18,16 +18,6 @@
             "text": "How many hours have I delivered on projects this month?"
         }
     ],
-    "capabilities": [
-        {
-            "name": "OneDriveAndSharePoint",
-            "items_by_url": [
-                {
-                    "url": "${{SHAREPOINT_DOCS_URL}}"
-                }
-            ]
-        }
-    ],
     "actions": [
         {
             "id": "treyresearch",
