@@ -12,6 +12,10 @@ In the exercises that follow, you will:
  - Add a reference to a SharePoint site containing project documents
  - Add a /projects feature to the API plugin; this will show you all of the relevant packaging files needed to make the API plugin work without asking you to build the whole thing in the limited time of this lab
 
+ ## Prerequisite knowledge
+
+ We assume you know the basics of creating and editing files in Visual Studio Code, and how to edit a JSON file. VS code isn't very different from other code editors, but if you have never used any code editor you might need a little help. Also JSON has a lot of squiggly braces, commas, and quotes which need to be exact in order for things to work. If you need help, please raise your hand and a proctor will explain how to compete these tasks. Thanks!
+
  ## Exercise 1: Run the starting solution
 
  ### Step 1: Open the solution in Visual Studio Code with Teams Toolkit
