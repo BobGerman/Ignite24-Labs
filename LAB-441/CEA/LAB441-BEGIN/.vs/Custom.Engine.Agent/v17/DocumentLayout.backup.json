@@ -7,8 +7,28 @@
       "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\env\\.env.dev||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.dev||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\infra\\azure.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\infra\\azure.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\infra\\azure.local.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\infra\\azure.local.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\teamsapp.local.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\teamsapp.local.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\teamsapp.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\teamsapp.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\template-tests\\custom.engine.agent\\custom.engine.agent\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,24 +47,8 @@
       "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\infra\\azure.local.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\infra\\azure.local.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\infra\\azure.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\infra\\azure.bicep||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\apppackage\\build\\manifest.local.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\apppackage\\build\\manifest.local.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\template-tests\\custom.engine.agent\\teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,11 +58,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 191,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "teamsapp.yml",
+              "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\teamsapp.yml",
+              "RelativeDocumentMoniker": "TeamsApp\\teamsapp.yml",
+              "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\teamsapp.yml",
+              "RelativeToolTip": "TeamsApp\\teamsapp.yml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAowEMAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2024-11-05T15:41:40.039Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".env.dev",
+              "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\env\\.env.dev",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.dev",
+              "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\env\\.env.dev",
+              "RelativeToolTip": "TeamsApp\\env\\.env.dev",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-05T15:36:17.713Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -75,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "manifest.json",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\appPackage\\manifest.json",
               "RelativeDocumentMoniker": "TeamsApp\\appPackage\\manifest.json",
@@ -88,72 +118,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "manifest.local.json",
-              "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\appPackage\\build\\manifest.local.json",
-              "RelativeDocumentMoniker": "TeamsApp\\appPackage\\build\\manifest.local.json",
-              "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\appPackage\\build\\manifest.local.json [Read Only]",
-              "RelativeToolTip": "TeamsApp\\appPackage\\build\\manifest.local.json [Read Only]",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-05T15:27:13.772Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\Custom.Engine.Agent\\Program.cs",
               "RelativeDocumentMoniker": "Custom.Engine.Agent\\Program.cs",
               "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\Custom.Engine.Agent\\Program.cs",
               "RelativeToolTip": "Custom.Engine.Agent\\Program.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAkwDAAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAkwDIAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T15:02:07.422Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": ".env.local.user",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\env\\.env.local.user",
               "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local.user",
               "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\env\\.env.local.user",
               "RelativeToolTip": "TeamsApp\\env\\.env.local.user",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAABwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
               "WhenOpened": "2024-11-05T15:17:06.065Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "azure.bicep",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\azure.bicep",
               "RelativeDocumentMoniker": "TeamsApp\\infra\\azure.bicep",
               "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\azure.bicep",
               "RelativeToolTip": "TeamsApp\\infra\\azure.bicep",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABJAAAAAAAAAA==",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAK8AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-11-05T15:15:55.572Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "azure.local.bicep",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\azure.local.bicep",
               "RelativeDocumentMoniker": "TeamsApp\\infra\\azure.local.bicep",
               "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\azure.local.bicep",
               "RelativeToolTip": "TeamsApp\\infra\\azure.local.bicep",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2024-11-05T15:11:57.106Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "Config.cs",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\Custom.Engine.Agent\\Config.cs",
               "RelativeDocumentMoniker": "Custom.Engine.Agent\\Config.cs",
@@ -166,20 +183,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "teamsapp.local.yml",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\teamsapp.local.yml",
               "RelativeDocumentMoniker": "TeamsApp\\teamsapp.local.yml",
               "ToolTip": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\teamsapp.local.yml",
               "RelativeToolTip": "TeamsApp\\teamsapp.local.yml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAqwC8AAABHAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAgwEUAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
               "WhenOpened": "2024-11-05T15:02:44.289Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "azurebot.bicep",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\botRegistration\\azurebot.bicep",
               "RelativeDocumentMoniker": "TeamsApp\\infra\\botRegistration\\azurebot.bicep",
@@ -192,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "aiServices.bicep",
               "DocumentMoniker": "E:\\template-tests\\Custom.Engine.Agent\\TeamsApp\\infra\\aiServices\\aiServices.bicep",
               "RelativeDocumentMoniker": "TeamsApp\\infra\\aiServices\\aiServices.bicep",
