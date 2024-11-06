@@ -1,1 +1,530 @@
-LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
+# LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
+
+# Create a custom engine agent
+
+Custom engine agents are chatbots for Microsoft Teams powered by generative AI, designed to provide sophisticated conversational experiences. Custom engine agents are built using the Teams AI library, which provides comprehensive AI functionalities, including managing prompts, actions, and model integration as well as extensive options for UI customization. This ensures that your chatbots leverage the full range of AI capabilities while delivering a seamless and engaging experience aligned with Microsoft platforms.
+
+## What will we be doing?
+
+Here, you create a custom engine agent that uses a language model hosted in Azure to answer questions using natural language:
+
+- **Create**: Create a custom agent agent project and use Teams Toolkit in Visual Studio.
+- **Chat prompts**: Define the system prompt.
+- **UI prompts**: Define prompts for starting new conversations.
+- **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
+
+## Open starter project
+
+TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-441/CEA/LAB441-BEGIN
+
+Start with opening the starter project in Visual Studio 2022.
+
+1. Open **Visual Studio 2022**
+1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
+1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
+1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
+1. Double click **Local Disk (C:)**, then double click **CEA_LAB441-BEGIN** folder.
+1. Select **Custom.Engine.Agent.sln**, then select **Open**.
+
+## Examine the solution
+
+The solution contains two projects:
+
+- **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your bot code. The bot logic and generative AI capatbilies are implemented using Teams AI library. 
+- **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your bot.
+
+## Create dev tunnel
+
+Dev tunnels allow developers to securely share local web services across the internet. When users interact with the bot in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your bot code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
+
+Continue in Visual Studio:
+
+1. Open the **View** menu, expand **Other windows**, and select **Dev Tunnels**.
+1. In the **Dev Tunnels** pane, select the **plus (+)** icon.
+1. In the dialog window, create the tunnel using the following settings:
+    1. **Account**: Select Add an account in the dropdown and follow the sign in for workplace or school account 
+    1. **Name**: custom-engine-agent
+    1. **Tunnel type**: Temporary
+    1. **Access**: Public
+1. To create the tunnel, select **OK**.
+1. In the confirmation prompt, select **OK**.
+
+## Add Azure AI API Key
+
+To save time we have already provisioned a language model in Azure for you to use in this lab. Teams Toolkit uses environment (.env) files to store values centrally that can be used across your application.
+
+Continue in Visual Studio:
+
+1. In the **TeamsApp** project, expand the **env** folder.
+1. Rename the file **.env.local.user.sample** to **.env.local**
+1. Open **.env.local.user** file
+1. Update the contents of the file:
+
+    ```text
+    SECRET_AZURE_OPENAI_API_KEY=[INSERT KEY]
+    ```
+
+1. Save the changes.
+
+> [!NOTE]
+>  When Teams Toolkit uses an environment variable with that is prefixed with **SECRET**, it will ensure that the value does not appear in any logs. 
+
+# Provision resources
+
+Teams Toolkit help developers automate tasks using workflow files. The workflow files are YML files which are stored in the root of the TeamsApp project.
+
+Continue in Visual Studio:
+
+1. In **TeamsApp** project, open **teamsapp.local.yml**.
+1. Examine the contents of the file.
+
+The file contains a single stage called **Provision** which contains several tasks.
+
+1. **teamsApp/create**: Registers an app in Teams Developer Portal and writes the app ID to **env\env.local**.
+1. **aadApp/create**: Registers an app in Microsoft Entra and writes several values to **env\env.local**.
+1. **aadApp/update**: Applies an app manifest to the Microsoft Entra app registration.
+1. **arm/deploy**: Provisions the Azure Bot Service using Bicep. It writes several values back to **env\env.local**.
+1. **file/createOrUpdateJsonFile**: Updates appsettings.development.json file in the web app which can be used at runtime.
+1. **teamsApp/validateManifest**: Validates the app manifest file.
+1. **teamsApp/zipAppPackage**: Creates the Teams app package.
+1. **teamsApp/validateAppPackage**: Validates the app package.
+1. **teamsApp/update**: Updates the app registration in the Teams Developer Portal.
+
+Use Teams Toolkit to execute the tasks in the workflow file.
+
+1. Right-click **TeamsApp** project.
+1. Expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
+1. In the **Microsoft 365 account** dialog, select the account you used to create the Dev Tunnel earlier and select **Continue**. This will start the Dev Tunnel and write the tunnel endpoint and domain to the **env\env.local** file.
+1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
+    1. **Subscription**: Expand the dropdown and select the subscription in the list
+    1. **Resource group**: Select **New...**, enter **rg-custom-engine-agent-local** the text field and then select **OK**.
+    1. **Region**: East US
+    1. Select **Provision**
+1. In the warning prompt, select **Provision**.
+1. Wait for the process to complete. Teams Toolkit will output its progress in the Output pane.
+1. In the **Info** prompt, select **View provisioned resources** to open a browser.
+
+Take a minute to examine the Azure Bot Service resource in the Azure Portal. 
+
+## Run and debug
+
+With everything in place, we are now ready to test our custom engine agent in Microsoft Teams for the first time.
+
+First, we need to start a debug session to start our local web app that contains the bot logic.
+
+Continue in Visual Studio:
+
+1. To start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. A browser window is launched and navigates to Microsoft Teams.
+1. In the browser, sign in to Microsoft 365 using your Microsoft 365 account details.
+1. Wait for Microsoft Teams to load and for the App install dialog to appear.
+
+Previously, Teams Toolkit registered the app in the Teams Developer Portal. To use the app we need to install it for the current user. Teams Toolkit launches the browser using a special URL which enables developers to install the app before they test it.
+
+> [!NOTE]
+> If any changes are made to the app manifest file. Developers will need to run the Prepare Teams App dependencies process again and install the app for the changes to be reflected in Microsoft Teams.
+
+Continuing in the web browser:
+
+1. In the App install dialog, select **Add**.
+1. In the App install confirmation dialog, select **Open**. The custom engine agent is displayed in Microsoft Teams.
+
+Now let's test that everything is working as expected.
+
+Continuing in the web browser:
+
+1. Enter **Hello, world!** in the message box and press <kbd>Enter</kbd> to send the message to the bot. A typing indicator appears whilst waiting for the  bot to respond.
+1. Notice the natural language response from the bot and a label **Generated by AI** is shown in the bot response.
+1. Continue a conversation with the bot.
+1. Go back to Visual Studio. Notice that in the Debug pane, Teams AI library is tracking the full conversation and displays appended conversation history in the output.
+1. Close the browser to stop the debug session.
+
+## Examine bot configuration
+
+The functionality of our bot is implemented using Teams AI library. Let's take a look at how our bot is configured.
+
+In Visual Studio:
+
+1. In the **Custom.Engine.Agent** project, open **Program.cs** file.
+1. Examine the contents of the file.
+
+The file sets up the web application and integrates it with Microsoft Bot Framework and services.
+
+- **WebApplicationBuilder**: Initializes web application with controllers and HTTP client services.
+- **Configuration**: Retrieve configuration options from the apps configration and sets up Bot Framework authentication.
+- **Dependency injection**: Registers BotFrameworkAuthentication and TeamsAdapter services. Configures Azure Blob Storage for persisting bot state and sets up an Azure OpenAI model service.
+- **Bot setup**: Registers the bot as a transient service. The bot logic is implemented using Teams AI library.
+
+Let's take a look at the bot setup.
+
+```csharp
+builder.Services.AddTransient<IBot>(sp =>
+{
+    // Create loggers
+    ILoggerFactory loggerFactory = sp.GetService<ILoggerFactory>();
+
+    // Create Prompt Manager
+    PromptManager prompts = new(new()
+    {
+        PromptFolder = "./Prompts"
+    });
+
+    // Create ActionPlanner
+    ActionPlanner<TurnState> planner = new(
+        options: new(
+            model: sp.GetService<OpenAIModel>(),
+            prompts: prompts,
+            defaultPrompt: async (context, state, planner) =>
+            {
+                PromptTemplate template = prompts.GetPrompt("Chat");
+                return await Task.FromResult(template);
+            }
+        )
+        { LogRepairs = true },
+        loggerFactory: loggerFactory
+    );
+
+    Application<TurnState> app = new ApplicationBuilder<TurnState>()
+        .WithAIOptions(new(planner))
+        .WithStorage(sp.GetService<IStorage>())
+        .Build();
+
+    return app;
+});
+```
+
+The key elements of the bot setup are:
+
+- **ILoggerFactory**: Used for logging messages to the output for debugging.
+- **PromptManager**: Determines the location of Prompts.
+- **ActionPlanner**: Determines which model and prompt should be used when handling a user message. By default, the planner uses a prompt template named 'Chat'.
+- **ApplicationBuilder**: Creates an object which represents a Bot that can handle incoming activities.
+
+## Update prompt
+
+Prompts are stored in the Prompts folder. Each prompt consists of two files:
+
+ - **config.json**: Contains the prompt configuration. This enables you to control parameters such as temperature, max tokens etc.
+ - **skprompt.txt**: The prompt text template. This text determines the behaviour of the agent.
+
+Let's update the Chat prompt template to change the bot behaviour.
+
+Continuing in Visual Studio:
+
+1. In the **Custom.Engine.Agent** project, expand the **Prompt** folder.
+1. In the **Chat** folder, open the **skprompt.txt** file. 
+1. Update the contents of the file:
+
+    ```text
+    You are a career specialist named "Career Genie" that helps Human Resources team for writing job posts.
+    You are friendly and professional.
+    You always greet users with excitement and introduce yourself first.
+    You like using emojis where appropriate.
+    ```
+
+1. Save changes.
+
+Now let's test our change.
+
+1. To start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
+1. Install and open the app in Microsoft Teams.
+1. In the message box, enter ++Hi++ and send the message. Wait for the response. Notice the change in the response.
+1. In the message box, enter +++Can you help me write a job post for a Senior Developer role?+++ and send the message. Wait for the response.
+
+Continue the conversation by sending more messages.
+
+- +++What would be the list of required skills for a Project Manager role?+++
+- +++Can you share a job template?+++
+
+Close the browser to stop the debug session.
+
+## Add UI prompts
+
+Developers can provide starter prompts for users to use. These prompts are shown in the user interface and a good way for users to discover how the bot can help them through examples.
+
+You define UI prompts in the app manifest. The app manifest describes the capabilities of our app. 
+
+Continuing in Visual Studio:
+
+1. In the **TeamsApp** project, expand the **appPackage** folder.
+1. In the **appPackage** folder, open the **manifest.json** file.
+1. In the **bots** array property, expand the first object with a **commandLists** array property.
+
+    ```
+    "bots": [
+      {
+        "botId": "${{BOT_ID}}",
+        "scopes": [
+          "personal"
+        ],
+        "supportsFiles": false,
+        "isNotificationOnly": false,
+        "commandLists": [
+          {
+             "scopes": [
+               "personal"
+             ],
+             "commands": [
+               {
+                 "title": "Write a job post for <role>",
+                 "description": "Generate a job posting for a specific role"
+               },
+               {
+                 "title": "Skill required for <role>",
+                 "description": "Identify skills required for a specific role"
+               }
+            ]
+          }
+        ]
+      }
+    ],
+    ```
+
+Now let's test our change.
+
+As we've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal.
+
+Continuing in Visual Studio:
+
+1. Right-click **TeamsApp** project, expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
+1. Confirm the prompts and wait till the process completes.
+1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
+1. Install and open the app in Microsoft Teams.
+1. Above the message box, select **View prompts** to open the prompt suggestions flyout.
+1. In the **Prompts** dialog, select one of the prompts. The text is added into the message box.
+1. In the message box, replace **<role>** with a job title, for example, Senior Software Engineer, and send the message.
+
+The UI prompts can also be seen when the user opens the bot for the first time.
+
+Continuing in the web browser:
+
+1. In the Microsoft Teams side bar, go to **Chats**.
+1. Find the chat with the name **Custom Engine Agent** in the list and select the **...** menu.
+1. Select **Delete** and confirm the action.
+1. In the Microsoft Teams side bar, select **...** to open the apps flyout.
+1. Select **Custom Engine Agent** to start a new chat. The two UI prompts are shown in the user interface.
+
+==== END OF 441 ====
+
+## Add message handler
+
+Suppose you want to run some logic when a message that contains a specific phrase or keyword is sent to the bot, then a message handler will allow you to do that.
+
+Up to this point, every time you send a message to the bot it is appended to the conversation history. Let's create a message handler that will clear the conversation history when a message that contains **/new** is sent and respond with a fixed message.
+
+> [!NOTE]
+> Message handlers are processed before the ActionPlanner and so take prioerity for handling the message response.
+ 
+Continuing in Visual Studio:
+
+1. In the **Custom.Engine.Agent** project, create a file called **MessageHandlers.cs** with the following contents:
+
+  ```csharp
+  using Microsoft.Bot.Builder;
+  using Microsoft.Teams.AI.State;
+  
+  namespace Custom.Engine.Agent;
+  
+  internal class MessageHandlers
+  {
+      internal static async Task NewChat(ITurnContext turnContext, TurnState turnState, CancellationToken cancellationToken)
+      {
+          turnState.DeleteConversationState();
+          await turnContext.SendActivityAsync("Conversation history has been cleared and a new conversation has been started.", cancellationToken: cancellationToken);
+      }
+  }
+  ```
+
+1. Open **Program.cs**, add the following code after **app** variable declaration: 
+
+  ```csharp
+  app.OnMessage("/new", MessageHandlers.NewChat);
+  ```
+
+Now let's test the change. 
+
+> [!TIP]
+> Your debug session from the previous section should still be running, if not start a new debug session.
+
+1. In the message box, enter **/new** and send the message. Notice that the message in the response is not from the language model but from the message handler.
+
+> [!TIP]
+> The conversation state is persisted to an emulated Azure storage account on your local machine during development. You can use Azure Storage Explorer to inspect the contents of the conversation history. The state files are stored in a blob container called state. Wehn you delete the conversation state, you are removing the file from this location.
+
+Close the browser to stop the debug session.
+
+## Implement Retrieval Augmentation Generation (RAG)
+
+Retrieval Augmentation Generation (RAG) is a technique used to improve the accuracy and relevance of responses generated by language models. For exmaple, suppose you have a collection of documents that you want the language model to reason over and use in it's responses. RAG enables you to extend the knowledge of the language model beyond it's training data.
+
+Azure OpenAI Studio provides a built in implementation for implementing RAG which is supported by Teams AI library.
+
+Let's implement RAG in our bot to enable the language model to reason over resumes and provide suggestions about recommended candidates.
+
+Like we did with the language model, we've already provisioned and configured an Azure AI Search resource for you use.
+
+First, let's create some environment varibles to store details that we will need to integrate Azure AI Search and implement RAG.
+
+Continuing in Visual Studio:
+
+1. In the **TeamApp** project, expand the **env** folder.
+1. Open the **env.local** file and add the following:
+  
+  ```
+  AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME=text-embedding-ada-002
+  AZURE_SEARCH_ENDPOINT=https://aais-ignite-2024-labs.search.windows.net
+  AZURE_SEARCH_INDEX_NAME=documents
+  ```
+
+1. Save your changes.
+1. Open the **env.local.user** file and add the following:
+
+   ```
+   SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
+   ```
+   
+Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime.
+
+1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
+1. Update the **file/createOrUpdateJsonFile** action:
+
+  ```yaml
+    - uses: file/createOrUpdateJsonFile
+      with:
+        target: ../Custom.Engine.Agent/appsettings.Development.json
+        content:
+          BOT_ID: ${{BOT_ID}}
+          BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+          AZURE_OPENAI_DEPLOYMENT_NAME: ${{AZURE_OPENAI_DEPLOYMENT_NAME}}
+          AZURE_OPENAI_KEY: ${{SECRET_AZURE_OPENAI_API_KEY}}
+          AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
+          AZURE_STORAGE_CONNECTION_STRING: UseDevelopmentStorage=true
+          AZURE_STORAGE_BLOB_CONTAINER_NAME: state
+          AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME: ${{AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME}}
+          AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
+          AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
+          AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
+  ```
+
+1. Save your changes.
+1. Open **Config.cs**, update the **ConfigOptions** class with the following:
+
+  ```csharp
+  public class ConfigOptions
+  {
+      public string BOT_ID { get; set; }
+      public string BOT_PASSWORD { get; set; }
+      public string AZURE_OPENAI_KEY { get; set; }
+      public string AZURE_OPENAI_ENDPOINT { get; set; }
+      public string AZURE_OPENAI_DEPLOYMENT_NAME { get; set; }
+      public string AZURE_STORAGE_CONNECTION_STRING { get; set; }
+      public string AZURE_STORAGE_BLOB_CONTAINER_NAME { get; set; }
+      public string AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME { get; set; }
+      public string AZURE_SEARCH_ENDPOINT { get; set; }                  
+      public string AZURE_SEARCH_INDEX_NAME { get; set; }                
+      public string AZURE_SEARCH_KEY { get; set; }
+  }
+  ```
+
+1. Save your changes.
+
+1. Update Prompts/chat/config.json
+
+  ```json
+  {
+    "schema": 1.1,
+    "description": "Custom engine agent",
+    "type": "completion",
+    "completion": {
+      "completion_type": "chat",
+      "include_history": true,
+      "include_input": true,
+      "max_input_tokens": 2800,
+      "max_tokens": 1000,
+      "temperature": 0.1,
+      "top_p": 1.0,
+      "presence_penalty": 0.0,
+      "frequency_penalty": 0.0,
+      "data_sources": [
+        {
+          "type": "azure_search",
+          "parameters": {
+            "endpoint": "$azure-search-endpoint$",
+            "index_name": "$azure-search-index-name$",
+            "semantic_configuration": "default",
+            "query_type": "vector",
+            "fields_mapping": {},
+            "in_scope": true,
+            "role_information": "$role-information$",
+            "filter": null,
+            "strictness": 3,
+            "top_n_documents": 5,
+            "authentication": {
+              "type": "api_key",
+              "key": "$azure-search-key$"
+            },
+            "embedding_dependency": {
+              "type": "deployment_name",
+              "deployment_name": "$azure-openai-embeddings-deployment-name$"
+            }
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+1. Save your changes.
+ 
+1. Update ActionPlanner in Program.cs
+
+  ```csharp
+      ActionPlanner<TurnState> planner = new(
+          options: new(
+              model: sp.GetService<OpenAIModel>(),
+              prompts: prompts,
+              defaultPrompt: async (context, state, planner) =>
+              {
+                  PromptTemplate template = prompts.GetPrompt("Chat");
+  
+                  var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
+                  var dataSourcesString = JsonSerializer.Serialize(dataSources);
+  
+                  var replacements = new Dictionary<string, string>
+                  {
+                      { "$azure-search-key$", config.AZURE_SEARCH_KEY },
+                      { "$azure-openai-embeddings-deployment-name$", config.AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME },
+                      { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
+                      { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
+                      { "$role-information$", await File.ReadAllTextAsync("./Prompts/chat/skprompt.txt", Encoding.UTF8) }
+                  };
+  
+                  foreach (var replacement in replacements)
+                  {
+                      dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
+                  }
+  
+                  dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
+                  template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
+  
+                  return await Task.FromResult(template);
+              }
+          )
+          { LogRepairs = true },
+          loggerFactory: loggerFactory
+      );
+  ```
+
+Prepare dependencies ->  F5
+Test- 
+
+Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?
+Who are the other good candidates?
+Who would be suitable for a position that requires 5+ python development experience?
+Can you suggest any candidates for a senior developer position with 7+ year experience that requires Japanese speaking?
+
+
+
+
+
+
+
