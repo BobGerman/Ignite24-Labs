@@ -16,32 +16,36 @@ Use this account to log into Microsoft 365:
 
 ---
 
-# Create a declarative agent for Microsoft 365
+# Part 1: Create a declarative agent for Microsoft 365
 
-In this lab you create a declarative agent for Microsoft 365 which can answer product support questions using information stored in documents in Microsoft 365:
+In this lab you create a declarative agent for Microsoft 365 which can answer product support questions using information stored in documents in Microsoft 365. You will learn how to:
 
-- **Create**: Scaffoled a declarative agent project using Teams Toolkit in Visual Studio Code.
-- **Custom instructions**: Shape responses by defining custom instructions.
-- **Custom grounding**: Add extra context to the agent by configuring grounding data.
-- **Conversation starters**: Define prompts for starting new conversations.
-- **Provision**: Upload your declarative agent to Microsoft 365 Copilot and validate the results.
+- **Create** a declarative agent using Teams Toolkit in Visual Studio Code
+- **Add custom instructions** to shape responses
+- **Add knowledge** by configuring the agent's grounding data to include SharePoint documents
+- **Add conversation starters** so Copilot can suggest prompts to help users get started
+- **Provision** your declarative agent to Microsoft 365 Copilot and validate the results.
 
-## Example scenario
+### Example scenario
 
 Suppose you work in a customer support team. You and your team handle queries about products that your organization makes from customers. You want to improve response times and provide a better experience. You store documents in a document library on a SharePoint Online site that contains product specifications, frequently asked questions, and policies for handling repairs, returns, and warranties. You want to be able to use natural language to query information in these documents and get answers quickly to customer queries.
 
-## Scaffold project
+### Exercise 1: Create a simple declarative agent
+
+#### Step 1: Scaffold project
 
 Start by creating a declarative agent project using Teams Toolkit for Visual Studio Code.
 
 1. Open **Visual Studio Code**.
-1. On the **Activity Bar**, select the **Teams Toolkit** icon.
-1. In the **Teams Toolkit** view, select **Create a New App** to start the project creation wizard and complete the following prompts:
+1. On the **Activity Bar**, select the **Teams Toolkit** icon 1️⃣. 
+1. In the **Teams Toolkit** view, select **Create a New App** 2️⃣ to start the project creation wizard and complete the following prompts 3️⃣:
     1. **New Project**: Copilot Agent
     1. **App Features using Copilot Agent**: Declarative agent
     1. **Create Declarative Agent**: No plugin
     1. **Workspace folder**: Default folder
     1. **Application Name**: da-product-support
+
+![Scaffold the project](./images/lab441-ttk-new-project.png)
 
 Teams Toolkit opens the project in a new window.
 
@@ -49,7 +53,7 @@ Teams Toolkit opens the project in a new window.
 
 !IMAGE[create-complete.png](instructions275666/create-complete.png)
 
-## Examine declarative agent manifest
+#### Step 2: Examine declarative agent manifest
 
 The declarative agent manifest defines the configuration of the agent.
 
@@ -69,13 +73,13 @@ You define **instructions** that determines how the agent should behave and shap
 
 The value of the **instructions** property contains a reference to a file named **instruction.txt**. The **$[file(path)]** function is provided by Teams Toolkit. The contents of the **instruction.txt** are included in the declarative agent manifest file when provisioned to Microsoft 365.
 
-- In the **appPackage** folder, open **instruction.txt** file and review the contents:
+- In the **appPackage** folder, open the **instruction.txt** file and review the contents:
 
 ```md
 You are a declarative agent and were created with Team Toolkit. You should start every response and answer to the user with "Thanks for using Teams Toolkit to create your declarative agent!\n\n" and then answer the questions and help the user.
 ```
 
-## Update the declarative agent manifest
+#### Step 3: Update the declarative agent manifest
 
 Let's update the **name** and **description** properties to be more relevant to our scenario.
 
@@ -96,7 +100,7 @@ The updated file should have the following contents:
 }
 ```
 
-## Upload the declarative agent to Microsoft 365
+#### Step 4: Package and upload the declarative agent to Microsoft 365
 
 Next, upload your declarative agent to your Microsoft 365 tenant.
 
@@ -107,6 +111,8 @@ In Visual Studio Code:
     !IMAGE[teams-toolkit-open.png](instructions275666/teams-toolkit-open.png)
 
 1. In the **Lifecycle** section, select **Provision**.
+
+![Provision project](./images/lab441-ttk-provision.png)
 
     !IMAGE[provision.png](instructions275666/provision.png)
 
@@ -126,7 +132,7 @@ Next, review the output of the provisioning process.
 
 Notice that the **instructions** property value contains the contents of the **instruction.txt** file. The **declarativeAgent.dev.json** file is included in the **appPackage.dev.zip** file along with the **manifest.dev.json**, **color.png**, and **outline.png** files. The **appPackage.dev.zip** file is uploaded to Microsoft 365.
 
-## Test the declarative agent in Microsoft 365 Copilot
+#### Step 5: Test the "In context" experience
 
 Next, let's run the declarative agent in Microsoft 365 Copilot and validate its functionality in both the **in-context** and **immersive** experiences.
 
@@ -168,6 +174,8 @@ Continuing in the browser, let's test the **in-context** experience.
 
     !IMAGE[test-in-context-exit-confirm.png](instructions275666/test-in-context-exit-confirm.png)
 
+### Step 6: Test the "immersive" experience
+
 Finally, let's test the **immersive** experience.
 
 Continuing in the browser:
@@ -190,7 +198,7 @@ Continuing in the browser:
 
 Finally, close the browser to stop the debug session in Visual Studio Code.
 
-# Configure custom knowledge
+### Exercise 2: Configure custom knowledge
 
 Declarative agents use custom knowledge to provide extra data and context to Microsoft 365 Copilot that is scoped to a specific scenario or task.
 
@@ -199,7 +207,7 @@ Custom knowledge consists of two parts:
 - **Custom instructions**: defines how the agent should behave and how it should shape its responses.
 - **Custom grounding**: defines the data sources that the agent can use in its responses.
 
-## Update custom instructions
+#### Step 1: Update custom instructions
 
 Instructions are specific directives or guidelines that are passed to the foundation model to shape its responses. These instructions can include:
 
@@ -220,7 +228,7 @@ In Visual Studio Code:
 
 1. Save your changes.
 
-## Configure grounding data
+#### Step 2: Configure grounding data
 
 Grounding is the process of connecting large language models (LLM) to real-world information, enabling more accurate and relevant responses. Grounding data is used to provide context and support to the LLM when generating responses. It reduces the need for the LLM to rely solely on its training data and improves the quality of the responses.
 
@@ -241,6 +249,7 @@ Configure the Documents document library in the Product support SharePoint site 
 In Visual Studio Code:
 
 1. In the **appPackage** folder, open **declarativeAgent.json** file.
+1. Just to keep track of the changes, change the name to "Product support 2"
 1. Add the following code snippet to the file, replacing **{URL}** with the direct URL to the **Products** folder in OneDrive that you copied and stored in a text editor earlier:
 
     ```json
@@ -264,7 +273,7 @@ The **declarativeAgent.json** file should look like this:
 {
     "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.0/schema.json",
     "version": "v1.0",
-    "name": "Product support",
+    "name": "Product support 2",
     "description": "Product support agent that can help answer customer queries about Contoso Electronics products",
     "instructions": "$[file('instruction.txt')]",
     "capabilities": [
@@ -280,7 +289,7 @@ The **declarativeAgent.json** file should look like this:
 }
 ```
 
-## Upload the declarative agent to Microsoft 365
+#### Step 3: Package and upload the declarative agent to Microsoft 365
 
 Upload your changes to Microsoft 365 and start a debug session.
 
@@ -292,18 +301,28 @@ In Visual Studio Code:
 1. In the **Activity Bar**, switch to the **Run and Debug** view.
 1. Select the **Start Debugging** button next to the configuration's dropdown, or press <kbd>F5</kbd>. A new browser window is launched and navigates to Microsoft 365 Copilot.
 
-## Test the declarative agent in Microsoft 365 Copilot
+#### Step 4: Test the declarative agent in Microsoft 365 Copilot
 
-Test your declarative agent in Microsoft 365 and validate the results.
+In Visual Studio Code:
 
-First, let's test the instructions:
+1. In the **Activity Bar**, switch to the **Run and Debug** view.
 
-Continuing in the web browser:
+    !IMAGE[debug-open.png](instructions275666/debug-open.png)
 
-1. In **Microsoft 365 Copilot**, select the icon in the top right to **expand the Copilot side panel**.
-1. Find **Product support** in the list of agents and select it to enter the immersive experience to chat directly with the agent.
-1. Select the sample prompt with the title **Learn more** and send the message.
-1. Wait for the response. Notice how the response is different from the previous instructions and reflects the new instructions.
+1. Select the **Start Debugging** button next to the configuration's dropdown, or press <kbd>F5</kbd>. A new browser window is launched and navigates to Microsoft 365 Copilot.
+
+    !IMAGE[debug-start.png](instructions275666/debug-start.png)
+
+    !IMAGE[debug-in-progress.png](instructions275666/debug-in-progress.png)
+
+    !IMAGE[debug-microsoft-365-copilot.png](instructions275666/debug-microsoft-365-copilot.png)
+
+1. Now test your declarative agent in Microsoft 365 and validate the results. First, let's test the instructions:
+
+    * In **Microsoft 365 Copilot**, select the icon in the top right to **expand the Copilot side panel**.
+    * Find **Product support** in the list of agents and select it to enter the immersive experience to chat directly with the agent.
+    * Select the sample prompt with the title **Learn more** and send the message.
+    * Wait for the response. Notice how the response is different from the previous instructions and reflects the new instructions.
 
     !IMAGE[test-custom-instructions.png](instructions275666/test-custom-instructions.png)
 
@@ -335,16 +354,19 @@ Finally, let's test the fallback response by asking a question that the agent ca
 
 Close the browser to stop the debug session in Visual Studio Code.
 
-# Add conversation starters
+### Exercise 3: Add conversation starters
 
 Conversation starters are sample prompts that are displayed in the immersive experience. These sample prompts provide a quick way for users to understand the types of questions that can be asked.
+
+#### Step 1: Update the declarative agent
 
 Update the declarative agent to include conversation starters that provide users with sample prompts to help them understand the types of questions they can ask.
 
 In Visual Studio Code:
 
 1. In the **appPackage** folder, open the **declarativeAgent.json** file.
-1. Add the following code snippet to the file:
+1. So you can see when it's been updated, change the name to "Product support 3"
+1. Add a comma at the end of the "instructions" line, then paste the following code snippet before the closing squiggly brace:
 
    ```json
    "conversation_starters": [
@@ -383,7 +405,7 @@ The **declarativeAgent.json** file should look like this:
 {
   "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.0/schema.json",
   "version": "v1.0",
-  "name": "Product support",
+  "name": "Product support 3",
   "description": "Product support agent that can help answer customer queries about Contoso Electronics products",
   "instructions": "$[file('instruction.txt')]",
   "capabilities": [
@@ -425,6 +447,8 @@ The **declarativeAgent.json** file should look like this:
 }
 ```
 
+#### Step 2: Upload and run your agent
+
 Next, upload your changes and start a debug session.
 
 In Visual Studio Code:
@@ -446,11 +470,11 @@ Continuing in the web browser:
 
 Close the browser to stop the debug session in Visual Studio Code.
 
-# Create a custom engine agent
+# Part 2: Create a custom engine agent
 
 Custom engine agents are chatbots for Microsoft Teams powered by generative AI, designed to provide sophisticated conversational experiences. Custom engine agents are built using the Teams AI library, which provides comprehensive AI functionalities, including managing prompts, actions, and model integration as well as extensive options for UI customization. This ensures that your chatbots leverage the full range of AI capabilities while delivering a seamless and engaging experience aligned with Microsoft platforms.
 
-## What will we be doing?
+### What will we be doing?
 
 Here, you create a custom engine agent that uses a language model hosted in Azure to answer questions using natural language:
 
