@@ -1,0 +1,159 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\teamsapp\\env\\.env.local||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\custom.engine.agent\\controllers\\botcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\controllers\\botcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\custom.engine.agent\\adapterwitherrorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\adapterwitherrorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\custom.engine.agent\\prompts\\chat\\skprompt.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\prompts\\chat\\skprompt.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\teamsapp\\env\\.env.local.user.sample||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user.sample||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-441\\cea\\lab441-end\\custom.engine.agent\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 191,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".env.local",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-06T14:05:17.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BotController.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T14:00:24.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": ".env.local.user.sample",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local.user.sample",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local.user.sample",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local.user.sample",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local.user.sample",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-06T13:38:56.561Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": ".env.local.user",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local.user",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local.user",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\env\\.env.local.user",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2024-11-06T13:38:55.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "skprompt.txt",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "RelativeToolTip": "Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-11-06T13:36:12.553Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "manifest.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\appPackage\\manifest.json",
+              "RelativeDocumentMoniker": "TeamsApp\\appPackage\\manifest.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\TeamsApp\\appPackage\\manifest.json",
+              "RelativeToolTip": "TeamsApp\\appPackage\\manifest.json",
+              "ViewState": "AgIAABoAAAAAAAAAAAAawCgAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-06T13:32:12.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdapterWithErrorHandler.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T18:30:12.521Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Program.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Program.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-441\\CEA\\LAB441-END\\Custom.Engine.Agent\\Program.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Program.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAzwA4AAABhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T18:29:56.467Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
