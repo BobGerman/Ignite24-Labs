@@ -573,6 +573,13 @@ Can you suggest any candidates for a senior developer position with 7+ year expe
         .WithStorage(sp.GetService<IStorage>())
         .Build();
     ```
+
+1. Update Program.cs, register feedback handler after /new message handler
+
+    ```csharp
+    app.OnFeedbackLoop(FeedbackHandler.OnFeedback);
+    ```
+    
 1. Save your changes
 
 Your bot code should look like
@@ -634,6 +641,8 @@ builder.Services.AddTransient<IBot>(sp =>
         .Build();
 
     app.OnMessage("/new", MessageHandlers.NewChat);
+
+    app.OnFeedbackLoop(FeedbackHandler.OnFeedback);
 
     return app;
 });
