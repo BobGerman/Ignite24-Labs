@@ -399,7 +399,6 @@ Next, let's make sure that these value are written to the **appsettings.developm
           AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
           AZURE_STORAGE_CONNECTION_STRING: UseDevelopmentStorage=true
           AZURE_STORAGE_BLOB_CONTAINER_NAME: state
-          AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME: ${{AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME}}
           AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
           AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
           AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
@@ -418,7 +417,6 @@ Next, let's make sure that these value are written to the **appsettings.developm
       public string AZURE_OPENAI_DEPLOYMENT_NAME { get; set; }
       public string AZURE_STORAGE_CONNECTION_STRING { get; set; }
       public string AZURE_STORAGE_BLOB_CONTAINER_NAME { get; set; }
-      public string AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME { get; set; }
       public string AZURE_SEARCH_ENDPOINT { get; set; }                  
       public string AZURE_SEARCH_INDEX_NAME { get; set; }                
       public string AZURE_SEARCH_KEY { get; set; }
@@ -429,49 +427,38 @@ Next, let's make sure that these value are written to the **appsettings.developm
 
 1. Update Prompts/chat/config.json
 
-  ```json
-  {
-    "schema": 1.1,
-    "description": "Custom engine agent",
-    "type": "completion",
-    "completion": {
-      "completion_type": "chat",
-      "include_history": true,
-      "include_input": true,
-      "max_input_tokens": 2800,
-      "max_tokens": 1000,
-      "temperature": 0.1,
-      "top_p": 1.0,
-      "presence_penalty": 0.0,
-      "frequency_penalty": 0.0,
-      "data_sources": [
-        {
-          "type": "azure_search",
-          "parameters": {
-            "endpoint": "$azure-search-endpoint$",
-            "index_name": "$azure-search-index-name$",
-            "semantic_configuration": "default",
-            "query_type": "vector",
-            "fields_mapping": {},
-            "in_scope": true,
-            "role_information": "$role-information$",
-            "filter": null,
-            "strictness": 3,
-            "top_n_documents": 5,
-            "authentication": {
-              "type": "api_key",
-              "key": "$azure-search-key$"
-            },
-            "embedding_dependency": {
-              "type": "deployment_name",
-              "deployment_name": "$azure-openai-embeddings-deployment-name$"
+    ```json
+    {
+      "schema": 1.1,
+      "description": "Custom engine agent",
+      "type": "completion",
+      "completion": {
+        "model": "gpt-4",
+        "completion_type": "chat",
+        "include_history": true,
+        "include_input": true,
+        "max_input_tokens": 100,
+        "max_tokens": 1000,
+        "temperature": 0.1,
+        "top_p": 1,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "data_sources": [
+          {
+            "type": "azure_search",
+            "parameters": {
+              "endpoint": "$azure-search-endpoint$",
+              "index_name": "$azure-search-index-name$",
+              "authentication": {
+                "type": "api_key",
+                "key": "$azure-search-key$"
+              }
             }
           }
-        }
-      ]
+        ]
+      }
     }
-  }
-  ```
+    ```
 
 1. Save your changes.
  
@@ -492,10 +479,8 @@ Next, let's make sure that these value are written to the **appsettings.developm
                   var replacements = new Dictionary<string, string>
                   {
                       { "$azure-search-key$", config.AZURE_SEARCH_KEY },
-                      { "$azure-openai-embeddings-deployment-name$", config.AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME },
                       { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
                       { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
-                      { "$role-information$", await File.ReadAllTextAsync("./Prompts/chat/skprompt.txt", Encoding.UTF8) }
                   };
   
                   foreach (var replacement in replacements)
@@ -514,6 +499,16 @@ Next, let's make sure that these value are written to the **appsettings.developm
       );
   ```
 
+1. Update prompt
+
+```text
+You are a career specialist named "Career Genie" that helps Human Resources team for finding the right candidate for the jobs. 
+You are friendly and professional.
+You always greet users with excitement and introduce yourself first.
+You like using emojis where appropriate.
+Always mention all citations in your content.
+```
+
 Prepare dependencies ->  F5
 Test- 
 
@@ -521,6 +516,70 @@ Can you suggest a candidate who is suitable for spanish speaking role that requi
 Who are the other good candidates?
 Who would be suitable for a position that requires 5+ python development experience?
 Can you suggest any candidates for a senior developer position with 7+ year experience that requires Japanese speaking?
+
+## Add feedback controls
+
+1. Create Models folder
+1. Create Feedback.cs model
+
+    ```csharp
+    using System.Text.Json.Serialization;
+
+    namespace Custom.Engine.Agent.Models;
+    
+    internal class Feedback
+    {
+        [JsonPropertyName("feedbackText")]
+        public string FeedbackText { get; set; }
+    }
+    ```
+1. Create FeedbackHandler.cs class
+
+    ```csharp
+    using Custom.Engine.Agent.Models;
+    using Microsoft.Bot.Builder;
+    using Microsoft.Teams.AI.Application;
+    using Microsoft.Teams.AI.State;
+    using System.Text.Json;
+    
+    namespace Custom.Engine.Agent;
+    
+    internal class FeedbackHandler
+    {
+        internal static async Task OnFeedback(ITurnContext turnContext, TurnState turnState, FeedbackLoopData feedbackLoopData, CancellationToken cancellationToken)
+        {
+            var reaction = feedbackLoopData.ActionValue.Reaction;
+            var feedback = JsonSerializer.Deserialize<Feedback>(feedbackLoopData.ActionValue.Feedback).FeedbackText;
+    
+            await turnContext.SendActivityAsync($"{reaction}:{feedback}", cancellationToken: cancellationToken);
+        }
+    }
+    ```
+
+1. Update Program.cs, create AIOptions object
+
+    ```csharp
+    AIOptions<TurnState> options = new(planner)
+    {
+        EnableFeedbackLoop = true
+    };
+    ```
+
+1. Update Program.cs, update Application object with new options
+
+    ```csharp
+    Application<TurnState> app = new ApplicationBuilder<TurnState>()
+        .WithAIOptions(options)
+        .WithStorage(sp.GetService<IStorage>())
+        .WithAuthentication(adapter, authenticationOptions)
+        .Build();
+    ```
+
+1. Test, send prompt, select up or down icon, in dialog enter feedback.
+
+## Customize citations
+
+## 
 
 
 
