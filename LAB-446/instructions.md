@@ -520,7 +520,7 @@ Can you suggest any candidates for a senior developer position with 7+ year expe
 ## Add feedback controls
 
 1. Create Models folder
-1. Create Feedback.cs model
+1. Create Models\Feedback.cs model
 
     ```csharp
     using System.Text.Json.Serialization;
@@ -556,7 +556,7 @@ Can you suggest any candidates for a senior developer position with 7+ year expe
     }
     ```
 
-1. Update Program.cs, create AIOptions object
+1. Update Program.cs, create AIOptions object after planner object
 
     ```csharp
     AIOptions<TurnState> options = new(planner)
@@ -571,9 +571,74 @@ Can you suggest any candidates for a senior developer position with 7+ year expe
     Application<TurnState> app = new ApplicationBuilder<TurnState>()
         .WithAIOptions(options)
         .WithStorage(sp.GetService<IStorage>())
-        .WithAuthentication(adapter, authenticationOptions)
         .Build();
     ```
+1. Save your changes
+
+Your bot code should look like
+
+```csharp
+builder.Services.AddTransient<IBot>(sp =>
+{
+    // Create loggers
+    ILoggerFactory loggerFactory = sp.GetService<ILoggerFactory>();
+
+    // Create Prompt Manager
+    PromptManager prompts = new(new()
+    {
+        PromptFolder = "./Prompts"
+    });
+
+    // Create ActionPlanner
+    ActionPlanner<TurnState> planner = new(
+        options: new(
+            model: sp.GetService<OpenAIModel>(),
+            prompts: prompts,
+            defaultPrompt: async (context, state, planner) =>
+            {
+                PromptTemplate template = prompts.GetPrompt("Chat");
+
+                var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
+                var dataSourcesString = JsonSerializer.Serialize(dataSources);
+
+                var replacements = new Dictionary<string, string>
+                {
+                    { "$azure-search-key$", config.AZURE_SEARCH_KEY },
+                    { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
+                    { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
+                };
+
+                foreach (var replacement in replacements)
+                {
+                    dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
+                }
+
+                dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
+                template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
+
+                return await Task.FromResult(template);
+            }
+        )
+        { LogRepairs = true },
+        loggerFactory: loggerFactory
+    );
+
+    AIOptions<TurnState> options = new(planner)
+    {
+        EnableFeedbackLoop = true
+    };
+
+    Application<TurnState> app = new ApplicationBuilder<TurnState>()
+        .WithAIOptions(options)
+        .WithStorage(sp.GetService<IStorage>())
+        .Build();
+
+    app.OnMessage("/new", MessageHandlers.NewChat);
+
+    return app;
+});
+```
+
 
 1. Test, send prompt, select up or down icon, in dialog enter feedback.
 
