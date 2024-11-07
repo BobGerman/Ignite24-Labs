@@ -1,0 +1,377 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\actions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\actions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\responsecardcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\responsecardcreator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\feedbackhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\feedbackhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\models\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\prompts\\chat\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\prompts\\chat\\config.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\appsettings.testtool.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\appsettings.testtool.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\prompts\\chat\\skprompt.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\prompts\\chat\\skprompt.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\controllers\\botcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\controllers\\botcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\env\\.env.local||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\messagehandlers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\messagehandlers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\config.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\teamsapp.local.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\teamsapp.local.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\custom.engine.agent\\adapterwitherrorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6280CA8-368D-4A4B-96A5-7AA0778BFDE0}|Custom.Engine.Agent\\Custom.Engine.Agent.csproj|solutionrelative:custom.engine.agent\\adapterwitherrorhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\env\\.env.local.user.sample||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\env\\.env.local.user.sample||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|e:\\ignite24-labs\\lab-446\\lab-446-end\\teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F49EF05D-944E-468C-9BA1-DCAD9C9E95A2}|TeamsApp\\TeamsApp.ttkproj|solutionrelative:teamsapp\\apppackage\\manifest.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 191,
+          "SelectedChildIndex": 10,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Models\\Feedback.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Models\\Feedback.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Models\\Feedback.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Models\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T14:43:27.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": ".env.local",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-06T14:05:17.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "BotController.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Controllers\\BotController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T14:00:24.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.json",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\appsettings.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.json",
+              "RelativeToolTip": "Custom.Engine.Agent\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-06T17:27:12.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "skprompt.txt",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "RelativeToolTip": "Custom.Engine.Agent\\Prompts\\chat\\skprompt.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-11-06T17:51:17.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": ".env.local.user",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local.user",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local.user",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local.user",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local.user",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003464|",
+              "WhenOpened": "2024-11-06T13:38:55.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.TestTool.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.TestTool.json",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\appsettings.TestTool.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.TestTool.json",
+              "RelativeToolTip": "Custom.Engine.Agent\\appsettings.TestTool.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-07T13:00:08.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Custom.Engine.Agent\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-07T12:57:17.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "config.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Prompts\\chat\\config.json",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Prompts\\chat\\config.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Prompts\\chat\\config.json",
+              "RelativeToolTip": "Custom.Engine.Agent\\Prompts\\chat\\config.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-06T16:10:19.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Actions.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Actions.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Actions.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Actions.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Actions.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAkwBgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T12:38:52.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\launchSettings.json",
+              "RelativeDocumentMoniker": "TeamsApp\\launchSettings.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\launchSettings.json",
+              "RelativeToolTip": "TeamsApp\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-07T12:57:27.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Program.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Program.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Program.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Program.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAkwGsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T18:29:56.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ResponseCardCreator.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\ResponseCardCreator.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\ResponseCardCreator.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\ResponseCardCreator.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\ResponseCardCreator.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAD0AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T15:12:51.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FeedbackHandler.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\FeedbackHandler.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\FeedbackHandler.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\FeedbackHandler.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\FeedbackHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T14:44:01.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\appsettings.Development.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\appsettings.Development.json",
+              "RelativeToolTip": "Custom.Engine.Agent\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-06T17:27:14.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "MessageHandlers.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\MessageHandlers.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\MessageHandlers.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\MessageHandlers.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\MessageHandlers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T14:59:38.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Config.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Config.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\Config.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\Config.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\Config.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAwA4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-06T15:48:55.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "teamsapp.local.yml",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\teamsapp.local.yml",
+              "RelativeDocumentMoniker": "TeamsApp\\teamsapp.local.yml",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\teamsapp.local.yml",
+              "RelativeToolTip": "TeamsApp\\teamsapp.local.yml",
+              "ViewState": "AgIAACEAAAAAAAAAAAAmwDMAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2024-11-06T16:03:44.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": ".env.local.user.sample",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local.user.sample",
+              "RelativeDocumentMoniker": "TeamsApp\\env\\.env.local.user.sample",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\env\\.env.local.user.sample",
+              "RelativeToolTip": "TeamsApp\\env\\.env.local.user.sample",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-11-06T13:38:56.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AdapterWithErrorHandler.cs",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "RelativeDocumentMoniker": "Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "RelativeToolTip": "Custom.Engine.Agent\\AdapterWithErrorHandler.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T18:30:12.521Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "manifest.json",
+              "DocumentMoniker": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\appPackage\\manifest.json",
+              "RelativeDocumentMoniker": "TeamsApp\\appPackage\\manifest.json",
+              "ToolTip": "E:\\Ignite24-Labs\\LAB-446\\LAB-446-END\\TeamsApp\\appPackage\\manifest.json",
+              "RelativeToolTip": "TeamsApp\\appPackage\\manifest.json",
+              "ViewState": "AgIAABoAAAAAAAAAAAAawCgAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-06T13:32:12.836Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
