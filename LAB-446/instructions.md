@@ -655,7 +655,133 @@ builder.Services.AddTransient<IBot>(sp =>
 
 ## Customize citations
 
-## 
+1. Create ResponseCardCreator.cs
+
+    ```csharp
+    using AdaptiveCards;
+    using Microsoft.Teams.AI.AI.Models;
+    
+    namespace Custom.Engine.Agent;
+    
+    internal static class ResponseCardCreator
+    {
+        public static AdaptiveCard CreateResponseCard(ChatMessage response)
+        {
+            var citations = response.Context.Citations;
+            var citationCards = new List<AdaptiveAction>();
+    
+            for (int i = 0; i < citations.Count; i++)
+            {
+                var citation = citations[i];
+                var card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 5))
+                {
+                    Body = [
+                        new AdaptiveTextBlock
+                        {
+                            Text = citation.Title,
+                            Weight = AdaptiveTextWeight.Bolder,
+                            FontType = AdaptiveFontType.Default
+                        },
+                        new AdaptiveTextBlock
+                        {
+                            Text = citation.Content,
+                            Wrap = true
+                        }
+                    ]
+                };
+    
+                citationCards.Add(new AdaptiveShowCardAction
+                {
+                    Title = $"{i + 1}",
+                    Card = card
+                });
+            }
+    
+            var formattedText = FormatResponse(response.GetContent<string>());
+    
+            var adaptiveCard = new AdaptiveCard(new AdaptiveSchemaVersion(1, 5))
+            {
+                Body = [
+                    new AdaptiveTextBlock
+                    {
+                        Text = formattedText,
+                        Wrap = true
+                    },
+                    new AdaptiveTextBlock
+                    {
+                        Text = "Citations",
+                        Weight = AdaptiveTextWeight.Bolder,
+                        FontType = AdaptiveFontType.Default,
+                        Wrap = true
+                    },
+                    new AdaptiveActionSet
+                    {
+                        Actions = citationCards
+                    }
+                ]
+            };
+            return adaptiveCard;
+        }
+    
+        private static string FormatResponse(string text)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(text, @"\[doc(\d)+\]", "**[$1]** ");
+        }
+    }
+    ```
+
+1. Create Actions.cs
+
+```csharp
+using Microsoft.Bot.Builder;
+using Microsoft.Teams.AI.AI.Action;
+using Microsoft.Teams.AI.AI.Planners;
+using Microsoft.Teams.AI.AI;
+using AdaptiveCards;
+using Microsoft.Bot.Schema;
+using Newtonsoft.Json.Linq;
+
+namespace Custom.Engine.Agent;
+
+internal class Actions
+{
+    [Action(AIConstants.SayCommandActionName, isDefault: false)]
+    public static async Task<string> SayCommandAsync([ActionTurnContext] ITurnContext turnContext, [ActionParameters] PredictedSayCommand command, CancellationToken cancellationToken = default)
+    {
+        IMessageActivity activity;
+        if (command?.Response?.Context?.Citations?.Count > 0)
+        {
+            AdaptiveCard card = ResponseCardCreator.CreateResponseCard(command.Response);
+            Attachment attachment = new()
+            {
+                ContentType = AdaptiveCard.ContentType,
+                Content = card
+            };
+            activity = MessageFactory.Attachment(attachment);
+        }
+        else
+        {
+            activity = MessageFactory.Text(command.Response.GetContent<string>());
+        }
+
+        activity.ChannelData = new
+        {
+            feedbackLoopEnabled = true
+        };
+
+        await turnContext.SendActivityAsync(activity, cancellationToken);
+
+        return string.Empty;
+    }
+}
+```
+
+1. Update Program.cs, import Actions after feedback handler
+
+    ```csharp
+    app.AI.ImportActions(new Actions());
+    ```
+
 
 
 
