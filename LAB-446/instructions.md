@@ -517,7 +517,7 @@ Who are the other good candidates?
 Who would be suitable for a position that requires 5+ python development experience?
 Can you suggest any candidates for a senior developer position with 7+ year experience that requires Japanese speaking?
 
-## Add feedback controls
+## Add feedback
 
 1. Create Models folder
 1. Create Models\Feedback.cs model
@@ -758,6 +758,21 @@ internal class Actions
                 Content = card
             };
             activity = MessageFactory.Attachment(attachment);
+
+            activity.Entities =
+            [
+                new Entity
+                {
+                    Type = "https://schema.org/Message",
+                    Properties = new()
+                    {
+                        { "@type", "Message" },
+                        { "@context", "https://schema.org" },
+                        { "@id", string.Empty },
+                        { "additionalType", JArray.FromObject(new string[] { "AIGeneratedContent" } ) }
+                    }
+                }
+            ];
         }
         else
         {
@@ -774,6 +789,7 @@ internal class Actions
         return string.Empty;
     }
 }
+
 ```
 
 1. Update Program.cs, import Actions after feedback handler
@@ -782,6 +798,54 @@ internal class Actions
     app.AI.ImportActions(new Actions());
     ```
 
+## Add sensitivity label
+
+1. Update Actions.cs, add expand activity entities
+
+    ```csharp
+    activity.Entities =
+    [
+        new Entity
+        {
+            Type = "https://schema.org/Message",
+            Properties = new()
+            {
+                { "@type", "Message" },
+                { "@context", "https://schema.org" },
+                { "@id", string.Empty },
+                { "additionalType", JArray.FromObject(new string[] { "AIGeneratedContent" } ) },
+                { "usageInfo", JObject.FromObject(
+                    new JObject(){
+                        { "@type", "CreativeWork" },
+                        { "name", "Confidential" },
+                        { "description", "Sensitive information, do not share outside of your organization." },
+                    })
+                }
+            }
+        }
+    ];
+    ```
+
+## Add moderation actions
+
+1. Update Actions.cs, add flagged input and flagged output functions
+
+    ```csharp
+    [Action(AIConstants.FlaggedInputActionName)]
+    public static async Task<string> OnFlaggedInput([ActionTurnContext] ITurnContext turnContext, [ActionParameters] Dictionary<string, object> entities)
+    {
+        string entitiesJsonString = System.Text.Json.JsonSerializer.Serialize(entities);
+        await turnContext.SendActivityAsync($"I'm sorry your message was flagged: {entitiesJsonString}");
+        return string.Empty;
+    }
+
+    [Action(AIConstants.FlaggedOutputActionName)]
+    public static async Task<string> OnFlaggedOutput([ActionTurnContext] ITurnContext turnContext)
+    {
+        await turnContext.SendActivityAsync("I'm not allowed to talk about such things.");
+        return string.Empty;
+    }
+    ```
 
 
 
