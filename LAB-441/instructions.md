@@ -483,27 +483,29 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **UI prompts**: Define prompts for starting new conversations.
 - **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
 
-## Open starter project
+### Exercise 1: Set up the project in Visual Studio 2002
 
-TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-441/CEA/LAB441-BEGIN
+#### Step 1: Open starter project
 
-Start with opening the starter project in Visual Studio 2022.
+You can find the project on your lab workstation at %CEA_START_LOCATION%. The first step is to open the starter project in Visual Studio 2022.
 
 1. Open **Visual Studio 2022**
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
+
+![Continue without code](./images/lab-441-vs-continuewithoutcode.png)
+
 1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
 1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
-1. Double click **Local Disk (C:)**, then double click **CEA_LAB441-BEGIN** folder.
-1. Select **Custom.Engine.Agent.sln**, then select **Open**.
+1. Navigate to %CEA_START_LOCATION% and double click on **Custom.Engine.Agent.sln**, then select **Open**.
 
-## Examine the solution
+#### Step 2: Examine the solution
 
 The solution contains two projects:
 
 - **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your bot code. The bot logic and generative AI capatbilies are implemented using Teams AI library. 
 - **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your bot.
 
-## Create dev tunnel
+#### Step 3: Create dev tunnel
 
 Dev tunnels allow developers to securely share local web services across the internet. When users interact with the bot in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your bot code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
 
@@ -511,6 +513,9 @@ Continue in Visual Studio:
 
 1. Open the **View** menu, expand **Other windows**, and select **Dev Tunnels**.
 1. In the **Dev Tunnels** pane, select the **plus (+)** icon.
+
+![Open dev tunnel in Visual Studio](./images/lab-441-vs-devtunnels.png)
+
 1. In the dialog window, create the tunnel using the following settings:
     1. **Account**: Select Add an account in the dropdown and follow the sign in for workplace or school account 
     1. **Name**: custom-engine-agent
@@ -519,29 +524,38 @@ Continue in Visual Studio:
 1. To create the tunnel, select **OK**.
 1. In the confirmation prompt, select **OK**.
 
-## Add Azure AI API Key
+#### Step 4: Add Azure AI endpoint, deployment, and API Key
 
 To save time we have already provisioned a language model in Azure for you to use in this lab. Teams Toolkit uses environment (.env) files to store values centrally that can be used across your application.
 
 Continue in Visual Studio:
 
 1. In the **TeamsApp** project, expand the **env** folder.
-1. Rename the file **.env.local.user.sample** to **.env.local**
-1. Open **.env.local.user** file
-1. Update the contents of the file:
+1. Edit the **.env.local** file. Open [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys)
+1. Copy the values for these 2 settings from the Gist: 
 
-    ```text
-    SECRET_AZURE_OPENAI_API_KEY=xxx
-    ```
+~~~text
+AZURE_OPENAI_ENDPOINT=https://xxx.openai.azure.com
+AZURE_OPENAI_DEPLOYMENT_NAME=xxx-x
+~~~
 
-1. Save the changes.
+1. Rename the file **.env.local.user.sample** to **.env.local.user**
+1. Retrieve the Azure OpenAI API key from [the same Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys) and copy this line to the **.env.local.user** file
+
+~~~text
+SECRET_AZURE_OPENAI_API_KEY=xxx
+~~~
+
+1. Be sure to save the changes to both **.env.local** and **.env.local.user**
 
 > [!NOTE]
 >  When Teams Toolkit uses an environment variable with that is prefixed with **SECRET**, it will ensure that the value does not appear in any logs. 
 
-# Provision resources
+### Exercise 2: Provision resources
 
 Teams Toolkit help developers automate tasks using workflow files. The workflow files are YML files which are stored in the root of the TeamsApp project.
+
+#### Step 1: Review Teams Toolkit provisioning tasks
 
 Continue in Visual Studio:
 
@@ -560,10 +574,13 @@ The file contains a single stage called **Provision** which contains several tas
 1. **teamsApp/validateAppPackage**: Validates the app package.
 1. **teamsApp/update**: Updates the app registration in the Teams Developer Portal.
 
-Use Teams Toolkit to execute the tasks in the workflow file.
+#### Step 2: Use Teams Toolkit to execute the tasks in the workflow file.
 
 1. Right-click **TeamsApp** project.
 1. Expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
+
+![Prepare Teams App Dependencies](./images/lab441-prepare-teams-app-dependencies.png)
+
 1. In the **Microsoft 365 account** dialog, select the account you used to create the Dev Tunnel earlier and select **Continue**. This will start the Dev Tunnel and write the tunnel endpoint and domain to the **env\env.local** file.
 1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
     1. **Subscription**: Expand the dropdown and select the subscription in the list
@@ -574,9 +591,9 @@ Use Teams Toolkit to execute the tasks in the workflow file.
 1. Wait for the process to complete. Teams Toolkit will output its progress in the Output pane.
 1. In the **Info** prompt, select **View provisioned resources** to open a browser.
 
-Take a minute to examine the Azure Bot Service resource in the Azure Portal. 
+Take a minute to examine the Azure Bot Service resource in the Azure Portal.
 
-## Run and debug
+#### Step 4: Run and debug
 
 With everything in place, we are now ready to test our custom engine agent in Microsoft Teams for the first time.
 
@@ -608,11 +625,13 @@ Continuing in the web browser:
 1. Go back to Visual Studio. Notice that in the Debug pane, Teams AI library is tracking the full conversation and displays appended conversation history in the output.
 1. Close the browser to stop the debug session.
 
-## Examine bot configuration
+#### Step 5: Examine bot configuration
 
 The functionality of our bot is implemented using Teams AI library. Let's take a look at how our bot is configured.
 
-In Visual Studio:
+Before beginning, close the browser to stop debugging, or click the "stop" button in the Visual Studio toolbar.
+
+![Stop debugger](./images/lab441-stop-debugger.png)
 
 1. In the **Custom.Engine.Agent** project, open **Program.cs** file.
 1. Examine the contents of the file.
@@ -669,7 +688,9 @@ The key elements of the bot setup are:
 - **ActionPlanner**: Determines which model and prompt should be used when handling a user message. By default, the planner uses a prompt template named 'Chat'.
 - **ApplicationBuilder**: Creates an object which represents a Bot that can handle incoming activities.
 
-## Update prompt
+### Exercise 3: Update the prompt
+
+#### Step 1: Update prompt files
 
 Prompts are stored in the Prompts folder. Each prompt consists of two files:
 
@@ -677,25 +698,24 @@ Prompts are stored in the Prompts folder. Each prompt consists of two files:
  - **skprompt.txt**: The prompt text template. This text determines the behaviour of the agent.
 
 Let's update the Chat prompt template to change the bot behaviour.
-
-Continuing in Visual Studio:
+Be sure you have stopped the debugger and can see the solution files in Visual Studio.
 
 1. In the **Custom.Engine.Agent** project, expand the **Prompt** folder.
 1. In the **Chat** folder, open the **skprompt.txt** file. 
 1. Update the contents of the file:
 
-    ```text
-    You are a career specialist named "Career Genie" that helps Human Resources team for writing job posts.
-    You are friendly and professional.
-    You always greet users with excitement and introduce yourself first.
-    You like using emojis where appropriate.
-    ```
+```text
+You are a career specialist named "Career Genie" that helps Human Resources team for writing job posts.
+You are friendly and professional.
+You always greet users with excitement and introduce yourself first.
+You like using emojis where appropriate.
+```
 
 1. Save changes.
 
-Now let's test our change.
+#### Step 2: Test the new prompt
 
-1. To start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
+1. Start a debug session, by pressing <kbd>F5</kbd> on your keyboard, or selecting the **Start** button in the toolbar. 
 1. Install and open the app in Microsoft Teams.
 1. In the message box, enter ++Hi++ and send the message. Wait for the response. Notice the change in the response.
 1. In the message box, enter +++Can you help me write a job post for a Senior Developer role?+++ and send the message. Wait for the response.
@@ -707,7 +727,7 @@ Continue the conversation by sending more messages.
 
 Close the browser to stop the debug session.
 
-## Add UI prompts
+#### Step 3: Add UI prompts
 
 Developers can provide starter prompts for users to use. These prompts are shown in the user interface and a good way for users to discover how the bot can help them through examples.
 
@@ -717,7 +737,7 @@ Continuing in Visual Studio:
 
 1. In the **TeamsApp** project, expand the **appPackage** folder.
 1. In the **appPackage** folder, open the **manifest.json** file.
-1. In the **bots** array property, expand the first object with a **commandLists** array property.
+1. Replace the **bots** property with this, which adds a **commandLists** array property.
 
     ```
     "bots": [
@@ -749,7 +769,7 @@ Continuing in Visual Studio:
     ],
     ```
 
-Now let's test our change.
+#### Step 4: Test the UI prompts
 
 As we've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal.
 
@@ -761,6 +781,9 @@ Continuing in Visual Studio:
 1. Install and open the app in Microsoft Teams.
 1. Above the message box, select **View prompts** to open the prompt suggestions flyout.
 1. In the **Prompts** dialog, select one of the prompts. The text is added into the message box.
+
+![View prompts](./images/lab441-view-prompts.png)
+
 1. In the message box, replace **<role>** with a job title, for example, Senior Software Engineer, and send the message.
 
 The UI prompts can also be seen when the user opens the bot for the first time.

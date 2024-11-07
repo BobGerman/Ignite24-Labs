@@ -2,7 +2,7 @@
 %DA_START_LOCATION% = C:\Users\LabUser\TeamsApps\Lab-441
 %DA_END_LOCATION% = C:\Users\LabUser\TeamsApps\Lab-441-Completed
 %DA_SHAREPOINT_URL% = https://lodsprodmca.sharepoint.com/sites/productsupport/
-%CEA_START_LOCATION% = 
+%CEA_START_LOCATION% = X
 %CEA_END_LOCATION% = 
 
 # Workstation Setup
