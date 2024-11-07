@@ -1,4 +1,4 @@
-# LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
+v# LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
 
 # Create a custom engine agent
 
@@ -551,7 +551,9 @@ Can you suggest any candidates for a senior developer position with 7+ year expe
             var reaction = feedbackLoopData.ActionValue.Reaction;
             var feedback = JsonSerializer.Deserialize<Feedback>(feedbackLoopData.ActionValue.Feedback).FeedbackText;
     
-            await turnContext.SendActivityAsync($"{reaction}:{feedback}", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"Thank you for your feedback!", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"Reaction: {reaction}", cancellationToken: cancellationToken);
+            await turnContext.SendActivityAsync($"Feedback: {feedback}", cancellationToken: cancellationToken);
         }
     }
     ```
