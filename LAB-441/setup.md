@@ -1,9 +1,9 @@
 # Tokens in instructions
-%DA_START_LOCATION% = C:\Users\LabUser\TeamsApps\Lab-441
-%DA_END_LOCATION% = C:\Users\LabUser\TeamsApps\Lab-441-Completed
-%DA_SHAREPOINT_URL% = https://lodsprodmca.sharepoint.com/sites/productsupport/
-%CEA_START_LOCATION% = X
-%CEA_END_LOCATION% = 
+%DA_START_LOCATION% = C:\Users\LabUser\TeamsApps\da-customer-support
+%DA_END_LOCATION% = C:\Users\LabUser\TeamsApps\da-customer-support-completed
+%DA_SHAREPOINT_URL% = https://lodsprodmca.sharepoint.com/sites/productmarketing
+%CEA_START_LOCATION% = C:\Users\LabUser\TeamsApps\cea-career-genie
+%CEA_END_LOCATION% = C:\Users\LabUser\TeamsApps\cea-career-genie-completed
 
 # Workstation Setup
 

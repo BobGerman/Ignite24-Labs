@@ -240,7 +240,7 @@ By default, a declarative agent isn't connected to any data sources. You configu
 
 In a web browser:
 
-1. In the address bar, type +++%DA_SHAREPOINT_URL%+++ and navigate to the Product support SharePoint site
+1. In the address bar, type +++https://lodsprodmca.sharepoint.com/sites/productmarketing+++ and navigate to the Product support SharePoint site
 1. In the left hand menu, select **Documents** to view the documents
 1. Examine the documents contents
 
@@ -487,7 +487,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 #### Step 1: Open starter project
 
-You can find the project on your lab workstation at %CEA_START_LOCATION%. The first step is to open the starter project in Visual Studio 2022.
+You can find the project on your lab workstation at **C:\Users\LabUser\TeamsApps\cea-career-genie**. The first step is to open the starter project in Visual Studio 2022.
 
 1. Open **Visual Studio 2022**
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
@@ -496,7 +496,7 @@ You can find the project on your lab workstation at %CEA_START_LOCATION%. The fi
 
 1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
 1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
-1. Navigate to %CEA_START_LOCATION% and double click on **Custom.Engine.Agent.sln**, then select **Open**.
+1. Navigate to C:\Users\LabUser\TeamsApps\cea-career-genie and double click on **Custom.Engine.Agent.sln**, then select **Open**.
 
 #### Step 2: Examine the solution
 
