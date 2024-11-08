@@ -15,7 +15,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 ## Open starter project
 
-TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-441/CEA/LAB441-BEGIN
+TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB446-BEGIN
 
 Start with opening the starter project in Visual Studio 2022.
 
@@ -52,6 +52,9 @@ Continue in Visual Studio:
 ## Add Azure AI API Key
 
 To save time we have already provisioned a language model in Azure for you to use in this lab. Teams Toolkit uses environment (.env) files to store values centrally that can be used across your application.
+
+> [!IMPORTANT]
+> Keys can be found on [GitHub](https://gist.github.com/garrytrinder/0da49ec4ba50b023e5b75a1c14fa1f22). PLEASE DO NOT SHARE OUTSIDE OF THIS LAB!
 
 Continue in Visual Studio:
 
