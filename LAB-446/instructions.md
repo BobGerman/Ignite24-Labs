@@ -210,7 +210,7 @@ Prompts are stored in the Prompts folder. A prompt is defined as a subfolder tha
  - **config.json**: The prompt configuration. This enables you to control parameters such as temperature, max tokens etc. that are passed to the language model.
  - **skprompt.txt**: The prompt text template. This text determines the behaviour of the agent.
 
-Let's update the Chat prompt template to change the bot behaviour.
+Here, you'll update the default prompt to change the agents behaviour.
 
 Continuing in Visual Studio:
 
@@ -245,7 +245,7 @@ Close the browser to stop the debug session.
 
 Prompt suggestions are shown in the user interface and a good way for users to discover how the bot can help them through examples.
 
-You define prompt suggestions in the app manifest.
+Here, you'll define two prompt suggestions.
 
 Continuing in Visual Studio:
 
@@ -282,9 +282,8 @@ Continuing in Visual Studio:
       }
     ],
     ```
-
-
-As we've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal before starting a debug session to test it.
+    
+As you've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal before starting a debug session to test it.
 
 Continuing in Visual Studio:
 
@@ -317,7 +316,7 @@ Suppose you want to run some logic when a message that contains a specific phras
 
 Up to this point, every time you send and recieve a message the contents of the messages are saved in the bot state. During development the bot state is stored in an emulated Azure Storage account hosted on your machine. You can inspect the bot state using Azure Storage Explorer. 
 
-Let's create a message handler that will clear the conversation history stored in the bot state when a message that contains **/new** is sent, and respond with a fixed message.
+Here, you'll create a message handler that will clear the conversation history stored in the bot state when a message that contains **/new** is sent, and respond with a fixed message.
 
 > [!NOTE]
 > Message handlers are processed before the ActionPlanner and so take priority for handling the response.
@@ -363,7 +362,7 @@ Retrieval Augmentation Generation (RAG) is a technique used to improve the accur
 
 Azure OpenAI On Your Data enables you to run language models on your own enterprise data without needing to train or fine-tune models. You can specify sources to support the responses based on the latest information available in your designated data sources.
 
-Let's implement RAG in our bot to enable the language model to reason over resumes and provide candidate recommendations.
+Here you'll implement RAG using Azure Open On Your Data to enable the language model to reason over resumes and provide candidate recommendations.
 
 Like we did with the language model, we've already provisioned and configured the services in Azure for you to use.
 
@@ -572,7 +571,7 @@ Close the browser to stop the debug session.
 
 Feedback is a crucial way to understand the quality of the responses that are produced by your agent once you put it in the hands of your end users. Using the Feedback Loop feature in Teams AI library, you can enable controls to collect postive and negative feedback from end users in the response.
 
-First, let's create the Feedback Loop handler.
+Here, you'll create a feedback handler and register it with the application to capture user feedback.
 
 Continuing in Visual Studio:
 
@@ -724,7 +723,7 @@ Now let's test the changes.
 
 You've seen so far that Teams AI library provides some user interface components automatically, such as the AI generated label and document citations when you integrated Azure OpenAI On Your Data. Suppose you want more granular control over how responses are represented, for example, you want to display additional controls. Teams AI library allows developers to override the **PredictedSAYCommand** action which is responsible for sending the repsonse from the language model to the Teams user interface.
 
-Here, you'll override this action to render the language model response in an Adaptive Card. The Adaptive Card displays the languge model text response and includes controls to display additional citation information.
+Here, you'll render the language model response in an Adaptive Card. The Adaptive Card displays the languge model text response and includes controls to display additional citation information.
 
 Continuing in Visual Studio:
 
@@ -1014,11 +1013,15 @@ Continuing in the browser:
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 
-## Add moderation actions
+## Add content safety moderation
 
+The content filtering system integrated into Azure OpenAI Service runs alongside the core models, including DALL-E image generation models. It uses an ensemble of multi-class classification models to detect four categories of harmful content (violence, hate, sexual, and self-harm) at four severity levels respectively (safe, low, medium, and high), and optional binary classifiers for detecting jailbreak risk, existing text, and code in public repositories. The default content filtering configuration is set to filter at the medium severity threshold for all four content harms categories for both prompts and completions. That means that content that is detected at severity level medium or high is filtered, while content detected at severity level low or safe is not filtered by the content filters.
 
+Here, you'll register the Azure Safety Content Moderator to moderate both inputs and output, and add actions to provide custom messages when the content safety measures are triggered.
 
-1. Update Actions.cs, add flagged input and flagged output functions
+Continuing in Visual Studio:
+
+1. In the **Custom.Engine.Agent** project, open **Actions.cs** file and add the following code to the Actions class.
 
     ```csharp
     [Action(AIConstants.FlaggedInputActionName)]
@@ -1036,12 +1039,36 @@ Continuing in the browser:
         return string.Empty;
     }
     ```
+1. Save your changes.
 
-## Add authentication
+Now, register the Azure Content Safety moderator.
 
-Stretch goal
+1. Open **Program.cs**.
+1. Register **AzureContentSafetyModerator** as a service before the bot code. 
 
+    ```csharp
+    builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
+        new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
+    );
+    ```
+1. In the bot code, update the **AIOptions** object to register the safety moderator with the application.
 
+    ```csharp
+    AIOptions<TurnState> options = new(planner)
+    {
+        EnableFeedbackLoop = true,
+        Moderator = sp.GetService<IModerator<TurnState>>()
+    };
+    ```
+1. Save your changes.
 
+Now, let's test the change.
 
+> [!TIP]
+> Your debug session from the previous section should still be running, if not start a new debug session.
+
+Continuing in the browser:
+
+1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
+1. In the message box, enter +++[SOMETHING INAPPROPRIATE]+++ and send the message. Wait for the response.
 
