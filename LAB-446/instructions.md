@@ -1,4 +1,4 @@
-v# LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
+# LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
 
 # Create a custom engine agent
 
@@ -847,7 +847,9 @@ internal class Actions
     }
     ```
 
+## Add authentication
 
+Stretch goal
 
 
 
