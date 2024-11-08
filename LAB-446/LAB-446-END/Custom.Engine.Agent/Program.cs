@@ -10,6 +10,7 @@ using Microsoft.Teams.AI.AI.Prompts;
 using Microsoft.Teams.AI.State;
 using System.Text.Json;
 using Microsoft.Teams.AI.AI;
+using Microsoft.Teams.AI.AI.Moderator;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +52,10 @@ builder.Services.AddSingleton<OpenAIModel>(sp => new(
     },
     sp.GetService<ILoggerFactory>()
 ));
+
+builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
+    new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
+);
 
 // Create the bot as transient. In this case the ASP Controller is expecting an IBot.
 builder.Services.AddTransient<IBot>(sp =>
@@ -100,7 +105,8 @@ builder.Services.AddTransient<IBot>(sp =>
 
     AIOptions<TurnState> options = new(planner)
     {
-        EnableFeedbackLoop = true
+        EnableFeedbackLoop = true,
+        Moderator = sp.GetService<IModerator<TurnState>>()
     };
 
     Application<TurnState> app = new ApplicationBuilder<TurnState>()

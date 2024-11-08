@@ -23,8 +23,13 @@ internal class Actions
                 Content = card
             };
             activity = MessageFactory.Attachment(attachment);
+        }
+        else
+        {
+            activity = MessageFactory.Text(command.Response.GetContent<string>());
+        }
 
-            activity.Entities =
+        activity.Entities =
             [
                 new Entity
                 {
@@ -45,11 +50,6 @@ internal class Actions
                     }
                 }
             ];
-        }
-        else
-        {
-            activity = MessageFactory.Text(command.Response.GetContent<string>());
-        }
 
         activity.ChannelData = new
         {
@@ -58,6 +58,21 @@ internal class Actions
 
         await turnContext.SendActivityAsync(activity, cancellationToken);
 
+        return string.Empty;
+    }
+
+    [Action(AIConstants.FlaggedInputActionName)]
+    public static async Task<string> OnFlaggedInput([ActionTurnContext] ITurnContext turnContext, [ActionParameters] Dictionary<string, object> entities)
+    {
+        string entitiesJsonString = System.Text.Json.JsonSerializer.Serialize(entities);
+        await turnContext.SendActivityAsync($"I'm sorry your message was flagged: {entitiesJsonString}");
+        return string.Empty;
+    }
+
+    [Action(AIConstants.FlaggedOutputActionName)]
+    public static async Task<string> OnFlaggedOutput([ActionTurnContext] ITurnContext turnContext)
+    {
+        await turnContext.SendActivityAsync("I'm not allowed to talk about such things.");
         return string.Empty;
     }
 }
