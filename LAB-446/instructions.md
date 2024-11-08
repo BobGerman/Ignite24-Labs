@@ -1051,6 +1051,7 @@ Now, register the Azure Content Safety moderator.
         new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
     );
     ```
+        
 1. In the bot code, update the **AIOptions** object to register the safety moderator with the application.
 
     ```csharp
@@ -1061,6 +1062,80 @@ Now, register the Azure Content Safety moderator.
     };
     ```
 1. Save your changes.
+
+The bot code should look like:
+
+```csharp
+builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
+    new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
+);
+
+// Create the bot as transient. In this case the ASP Controller is expecting an IBot.
+builder.Services.AddTransient<IBot>(sp =>
+{
+    // Create loggers
+    ILoggerFactory loggerFactory = sp.GetService<ILoggerFactory>();
+
+    // Create Prompt Manager
+    PromptManager prompts = new(new()
+    {
+        PromptFolder = "./Prompts"
+    });
+
+    // Create ActionPlanner
+    ActionPlanner<TurnState> planner = new(
+        options: new(
+            model: sp.GetService<OpenAIModel>(),
+            prompts: prompts,
+            defaultPrompt: async (context, state, planner) =>
+            {
+                PromptTemplate template = prompts.GetPrompt("Chat");
+
+                var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
+                var dataSourcesString = JsonSerializer.Serialize(dataSources);
+
+                var replacements = new Dictionary<string, string>
+                {
+                    { "$azure-search-key$", config.AZURE_SEARCH_KEY },
+                    { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
+                    { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
+                };
+
+                foreach (var replacement in replacements)
+                {
+                    dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
+                }
+
+                dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
+                template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
+
+                return await Task.FromResult(template);
+            }
+        )
+        { LogRepairs = true },
+        loggerFactory: loggerFactory
+    );
+
+    AIOptions<TurnState> options = new(planner)
+    {
+        EnableFeedbackLoop = true,
+        Moderator = sp.GetService<IModerator<TurnState>>()
+    };
+
+    Application<TurnState> app = new ApplicationBuilder<TurnState>()
+        .WithAIOptions(options)
+        .WithStorage(sp.GetService<IStorage>())
+        .Build();
+
+    app.OnMessage("/new", MessageHandlers.NewChat);
+
+    app.OnFeedbackLoop(FeedbackHandler.OnFeedback);
+
+    app.AI.ImportActions(new Actions());
+
+    return app;
+});
+```
 
 Now, let's test the change.
 
