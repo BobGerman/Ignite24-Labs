@@ -101,7 +101,7 @@ Use Teams Toolkit to execute the tasks in the workflow file.
 1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
     1. **Subscription**: Expand the dropdown and select the subscription in the list
     1. **Resource group**: Select **New...**, enter **rg-custom-engine-agent-local** the text field and then select **OK**.
-    1. **Region**: East US
+    1. **Region**: West US
     1. Select **Provision**
 1. In the warning prompt, select **Provision**.
 1. Wait for the process to complete. Teams Toolkit will output its progress in the Output pane.
