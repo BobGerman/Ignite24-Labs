@@ -14,7 +14,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **Message handlers**: Run logic when recieving a specific keyword or phrase.
 - **Chat with your data**: Integrate with Azure AI Search to implement Retrieval Augmentation Generation (RAG).
 - **Feedback**: Collect feedback from end users
-- **Customize responses**: Control the agent response
+- **Customize responses**: Customize the agent response
 - **Sensitive information**: Display guidance to end users
 - **Content moderation**: Integrate responsible AI features
 - **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
@@ -114,7 +114,7 @@ The file contains a single stage called **Provision** which contains several tas
 1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
     1. **Subscription**: Expand the dropdown and select the subscription in the list
     1. **Resource group**: Select **New...**, enter +++rg-custom-engine-agent-local+++ the text field and then select **OK**.
-    1. **Region**: xpand the dropdown and select **West US** in the list
+    1. **Region**: Expand the dropdown and select **West US** in the list
     1. Select **Provision**
 1. In the warning prompt, select **Provision**.
 1. Wait for the process to complete. Teams Toolkit will output its progress in the Output pane.
