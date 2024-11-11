@@ -45,7 +45,7 @@ Start by creating a declarative agent project using Teams Toolkit for Visual Stu
     1. **Workspace folder**: Default folder
     1. **Application Name**: da-product-support
 
-![Scaffold the project](./images/lab441-ttk-new-project.png)
+!IMAGE[create-complete.png](instructions275666/lab441-ttk-new-project.png)
 
 Teams Toolkit opens the project in a new window.
 
@@ -112,9 +112,7 @@ In Visual Studio Code:
 
 1. In the **Lifecycle** section, select **Provision**.
 
-![Provision project](./images/lab441-ttk-provision.png)
-
-    !IMAGE[provision.png](instructions275666/provision.png)
+!IMAGE[create-complete.png](instructions275666/lab441-ttk-provision.png)
 
 1. In the prompt, select **Sign in** and follow the prompts to sign in to your Microsoft 365 tenant using Teams Toolkit. The provisioning process starts automatically after you sign in. As a reminder, your username is **Username: +++@lab.CloudPortalCredential(User1).Username+++** and your password is **Password: +++@lab.CloudPortalCredential(User1).Password+++**. 
 
@@ -494,7 +492,7 @@ You can find the project on your lab workstation at C:\Users\LabUser\TeamsApps\c
 1. Open **Visual Studio 2022**
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
 
-![Continue without code](./images/lab-441-vs-continuewithoutcode.png)
+!IMAGE[create-complete.png](instructions275666/lab-441-vs-continuewithoutcode.png)
 
 1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
 1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
@@ -516,7 +514,7 @@ Continue in Visual Studio:
 1. Open the **View** menu, expand **Other windows**, and select **Dev Tunnels**.
 1. In the **Dev Tunnels** pane, select the **plus (+)** icon.
 
-![Open dev tunnel in Visual Studio](./images/lab-441-vs-devtunnels.png)
+!IMAGE[create-complete.png](instructions275666/lab-441-vs-devtunnels.png)
 
 1. In the dialog window, create the tunnel using the following settings:
     1. **Account**: Select Add an account in the dropdown and follow the sign in for workplace or school account 
@@ -574,7 +572,7 @@ The file contains a single stage called **Provision** which contains several tas
 1. Right-click **TeamsApp** project.
 1. Expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
 
-![Prepare Teams App Dependencies](./images/lab441-prepare-teams-app-dependencies.png)
+!IMAGE[create-complete.png](instructions275666/lab441-prepare-teams-app-dependencies.png)
 
 1. In the **Microsoft 365 account** dialog, select the account you used to create the Dev Tunnel earlier and select **Continue**. This will start the Dev Tunnel and write the tunnel endpoint and domain to the **env\env.local** file.
 1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
@@ -626,7 +624,7 @@ The functionality of our agent is implemented using Teams AI library. Let's take
 
 Before beginning, close the browser to stop debugging, or click the "stop" button in the Visual Studio toolbar.
 
-![Stop debugger](./images/lab441-stop-debugger.png)
+!IMAGE[create-complete.png](instructions275666/lab441-stop-debugger.png)
 
 1. In the **Custom.Engine.Agent** project, open **Program.cs** file.
 1. Examine the contents of the file.
@@ -788,7 +786,7 @@ Continuing in Visual Studio:
 1. Above the message box, select **View prompts** to open the prompt suggestions flyout.
 1. In the **Prompts** dialog, select one of the prompts. The text is added into the message box.
 
-![View prompts](./images/lab441-view-prompts.png)
+!IMAGE[create-complete.png](instructions275666/lab441-view-prompts.png)
 
 1. In the message box, replace **<role>** with a job title, for example, Senior Software Engineer, and send the message.
 
@@ -802,3 +800,5 @@ Continuing in the web browser:
 1. Select **Delete** and confirm the action.
 1. In the Microsoft Teams side bar, select **...** to open the apps flyout.
 1. Select **Custom Engine Agent** to start a new chat. The two UI prompts are shown in the user interface.
+
+# CONGRATULATIONS you have completed Lab 441!
