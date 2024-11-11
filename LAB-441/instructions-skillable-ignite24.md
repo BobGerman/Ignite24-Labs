@@ -36,7 +36,7 @@ Suppose you work in a customer support team. You and your team handle queries ab
 
 Start by creating a declarative agent project using Teams Toolkit for Visual Studio Code.
 
-1. Open **Visual Studio Code**.
+1. Open **Visual Studio Code** (the blue one)
 1. On the **Activity Bar**, select the **Teams Toolkit** icon 1️⃣. 
 1. In the **Teams Toolkit** view, select **Create a New App** 2️⃣ to start the project creation wizard and complete the following prompts 3️⃣:
     1. **New Project**: Copilot Agent
@@ -75,7 +75,7 @@ The value of the **instructions** property contains a reference to a file named 
 
 - In the **appPackage** folder, open the **instruction.txt** file and review the contents:
 
-```md
+```text
 You are a declarative agent and were created with Team Toolkit. You should start every response and answer to the user with "Thanks for using Teams Toolkit to create your declarative agent!\n\n" and then answer the questions and help the user.
 ```
 
@@ -489,7 +489,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 You can find the project on your lab workstation at C:\Users\LabUser\TeamsApps\cea-career-genie. The first step is to open the starter project in Visual Studio 2022.
 
-1. Open **Visual Studio 2022**
+1. Open **Visual Studio 2022** (the purple one).
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
 
 !IMAGE[create-complete.png](instructions275666/lab-441-vs-continuewithoutcode.png)
@@ -531,7 +531,7 @@ To save time we have already provisioned a language model in Azure for you to us
 Continue in Visual Studio:
 
 1. In the **TeamsApp** project, expand the **env** folder.
-1. Rename **.env.local.user.sample** to **.env.local**.
+1. Rename **.env.local.user.sample** to **.env.local.user**.
 1. Open **.env.local.user** file.
 1. Update the contents of the file, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys):
 
