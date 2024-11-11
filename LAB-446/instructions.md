@@ -9,6 +9,7 @@ Custom engine agents are chatbots for Microsoft Teams powered by generative AI, 
 Here, you create a custom engine agent that uses a language model hosted in Azure to answer questions using natural language:
 
 - **Create**: Create a custom agent agent project and use Teams Toolkit in Visual Studio.
+- **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
 - **Prompt template**: Determine the agent behaviour.
 - **Suggested prompts**: Define prompts for starting new conversations.
 - **Message handlers**: Run logic when recieving a specific keyword or phrase.
@@ -17,7 +18,6 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **Customize responses**: Customize the agent response
 - **Sensitive information**: Display guidance to end users
 - **Content moderation**: Integrate responsible AI features
-- **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
 
 ## Exercise 1: Setup project in Visual Studio 2022
 
