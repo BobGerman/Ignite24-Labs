@@ -14,10 +14,10 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **Suggested prompts**: Define prompts for starting new conversations.
 - **Message handlers**: Run logic when recieving a specific keyword or phrase.
 - **Chat with your data**: Integrate with Azure AI Search to implement Retrieval Augmentation Generation (RAG).
-- **Feedback**: Collect feedback from end users
-- **Customize responses**: Customize the agent response
-- **Sensitive information**: Display guidance to end users
-- **Content moderation**: Integrate responsible AI features
+- **Feedback**: Collect feedback from end users.
+- **Customize responses**: Customize the agent response.
+- **Sensitive information**: Display guidance to end users.
+- **Content moderation**: Integrate responsible AI features.
 
 ## Exercise 1: Setup project in Visual Studio 2022
 
