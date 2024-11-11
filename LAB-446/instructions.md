@@ -13,7 +13,9 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **UI prompts**: Define prompts for starting new conversations.
 - **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
 
-## Open starter project
+## Exercise 1: Hello, world!
+
+### Step 1: Open starter project
 
 TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB-446-BEGIN
 
@@ -26,14 +28,14 @@ Start with opening the starter project in Visual Studio 2022.
 1. Double click **Local Disk (C:)**, then double click **CEA_LAB441-BEGIN** folder.
 1. Select **Custom.Engine.Agent.sln**, then select **Open**.
 
-## Examine the solution
+### Step 2: Examine the solution
 
 The solution contains two projects:
 
 - **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your bot code. The bot logic and generative AI capatbilies are implemented using Teams AI library. 
 - **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your bot.
 
-## Create dev tunnel
+### Step 3: Create dev tunnel
 
 Dev tunnels allow developers to securely share local web services across the internet. When users interact with the bot in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your bot code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
 
@@ -49,7 +51,7 @@ Continue in Visual Studio:
 1. To create the tunnel, select **OK**.
 1. In the confirmation prompt, select **OK**.
 
-## Add Azure AI API Key
+### Step 4: Configure Azure OpenAI key
 
 To save time we have already provisioned a language model in Azure for you to use in this lab. Teams Toolkit uses environment (.env) files to store values centrally that can be used across your application.
 
@@ -72,7 +74,7 @@ Continue in Visual Studio:
 > [!NOTE]
 >  When Teams Toolkit uses an environment variable with that is prefixed with **SECRET**, it will ensure that the value does not appear in any logs. 
 
-# Provision resources
+### Step 5: Provision resources
 
 Teams Toolkit help developers automate tasks using workflow files. The workflow files are YML files which are stored in the root of the TeamsApp project.
 
@@ -109,7 +111,7 @@ Use Teams Toolkit to execute the tasks in the workflow file.
 
 Take a minute to examine the Azure Bot Service resource in the Azure Portal.
 
-## Run and debug
+### Step 6: Run and debug
 
 With everything in place, we are now ready to test our custom engine agent in Microsoft Teams for the first time.
 
@@ -141,7 +143,7 @@ Continuing in the web browser:
 1. Go back to Visual Studio. Notice that in the Debug pane, Teams AI library is tracking the full conversation and displays appended conversation history in the output.
 1. Close the browser to stop the debug session.
 
-## Examine bot configuration
+### Step 7: Examine bot configuration
 
 The functionality of our bot is implemented using Teams AI library. Let's take a look at how our bot is configured.
 
@@ -204,9 +206,9 @@ The key elements of the bot setup are:
 
 The bot is added as a transient service which means that everytime a message is recieved from the Bot Framework, our bot code will be executed.
 
-## Update prompt
+### Exercise: Prompt templates
 
-Prompts play a crucial role in communicating and directing the behavior of language models. Teams AI library uses prompt templates together with the Action Planner to 
+Prompts play a crucial role in communicating and directing the behavior of language models.
 
 Prompts are stored in the Prompts folder. A prompt is defined as a subfolder that contains two files:
 
@@ -244,11 +246,13 @@ Continue the conversation by sending more messages.
 
 Close the browser to stop the debug session.
 
-## Add prompt suggestions
+## Excercise 2: Prompt suggestions
 
 Prompt suggestions are shown in the user interface and a good way for users to discover how the bot can help them through examples.
 
 Here, you'll define two prompt suggestions.
+
+### Step 1: Update app manifest
 
 Continuing in Visual Studio:
 
@@ -285,7 +289,9 @@ Continuing in Visual Studio:
       }
     ],
     ```
-    
+
+### Step 2: Run and debug
+
 As you've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal before starting a debug session to test it.
 
 Continuing in Visual Studio:
@@ -313,17 +319,20 @@ Continuing in the web browser:
 
 ==== END OF 441 ====
 
-## Add message handler
+## Exercise 3: Message handlers
 
 Suppose you want to run some logic when a message that contains a specific phrase or keyword is sent to the bot, a message handler allows you to do that.
 
 Up to this point, every time you send and recieve a message the contents of the messages are saved in the bot state. During development the bot state is stored in an emulated Azure Storage account hosted on your machine. You can inspect the bot state using Azure Storage Explorer. 
 
-Here, you'll create a message handler that will clear the conversation history stored in the bot state when a message that contains **/new** is sent, and respond with a fixed message.
-
 > [!NOTE]
 > Message handlers are processed before the ActionPlanner and so take priority for handling the response.
  
+
+Here, you'll create a message handler that will clear the conversation history stored in the bot state when a message that contains **/new** is sent, and respond with a fixed message.
+
+## Step 1: Create message handler
+
 Continuing in Visual Studio:
 
 1. In the **Custom.Engine.Agent** project, create a file called **MessageHandlers.cs** with the following contents:
@@ -344,13 +353,17 @@ Continuing in Visual Studio:
   }
   ```
 
+## Step 2: Register message handler
+
 1. Open **Program.cs**, add the following code after **app** variable declaration: 
 
   ```csharp
   app.OnMessage("/new", MessageHandlers.NewChat);
   ```
 
-Now let's test the change. 
+## Step 3: Run and debug
+
+Now let's test the change.
 
 > [!TIP]
 > Your debug session from the previous section should still be running, if not start a new debug session.
@@ -359,7 +372,7 @@ Now let's test the change.
 
 Close the browser to stop the debug session.
 
-## Implement Retrieval Augmentation Generation (RAG)
+## Exercise 4: Retrieval Augmentation Generation (RAG)
 
 Retrieval Augmentation Generation (RAG) is a technique used to improve the accuracy and relevance of responses generated by language models. Suppose you have a collection of documents that you want the language model to reason over and use in it's responses. RAG enables you to provide extra knowledge and context beyond the data that the language model is trained on.
 
@@ -374,6 +387,8 @@ We provisioned and configured the following resources:
 - **Azure Storage Account**: Stores files uploaded through the Azure OpenAI On Your Data file upload feature.
 - **Embeddings model**: Generates numerical representations (embeddings) of document contents for use with language models during the file upload process.
 - **Azure AI Search**: Hosts the search index of our documents. Contains the document embeddings and additional metadata, such as file paths and timestamps.
+
+### Step 1: Configure Azure AI Search environment variables
 
 First, let's create some environment varibles to store details that we will need to integrate Azure AI Search.
 
@@ -394,7 +409,7 @@ Continuing in Visual Studio:
    ```
    SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
    ```
-   
+
 Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our bot code.
 
 1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
@@ -440,6 +455,8 @@ Now, extend the model so we can easily access the new environment variable value
   ```
 
 1. Save your changes.
+
+### Step 2: Integrate Azure AI Search in prompt template configration
 
 Update the prompt template configuration file to integrate Azure OpenAI On Your Data data source.
 
@@ -492,6 +509,8 @@ Azure OpenAI On Your Data integration is defined in the **data_sources** array. 
 
 Notice that we use placeholders as values for some properties, for example **$azure-search-key$**, in the configuration file. These placeholders will be updated dynamically in code to ensure that we don't store senstitive information in plain text.
 
+### Step 3: Replace prompt template configuration placeholders with values
+
 Continuing in Visual Studio:
 
 1. Open **Program.cs** file.
@@ -535,6 +554,8 @@ Continuing in Visual Studio:
 
 The **defaultPrompt** anonymous function provides a way to dyanmically alter the behaviour of our bot. This is where you can include logic to choose different prompt templates for different functions or behaviours that you want the bot to provide. Suppose you want to dynamically adjust the temperature or choose a different prompt template based in a specific input. Here is where you would add the logic to make those changes on the fly.
 
+### Step 4: Update prompt template
+
 Now, update the prompt text to reflect the change in agent behaviour.
 
 1. Update prompt
@@ -546,6 +567,8 @@ Now, update the prompt text to reflect the change in agent behaviour.
     You like using emojis where appropriate.
     Always mention all citations in your content.
     ```
+
+### Step 5: Run and debug
 
 As we've made a change to the app manifest file, we need to Run the Prepare Teams App Dependencies process to update the app registration in the Teams Developer Portal before starting a debug session to test it.
 
@@ -570,11 +593,13 @@ Try out some more prompts and review the outputs.
 
 Close the browser to stop the debug session.
 
-## Add feedback controls
+## Exercise 5: Feedback
 
 Feedback is a crucial way to understand the quality of the responses that are produced by your agent once you put it in the hands of your end users. Using the Feedback Loop feature in Teams AI library, you can enable controls to collect postive and negative feedback from end users in the response.
 
 Here, you'll create a feedback handler and register it with the application to capture user feedback.
+
+### Step 1: Create Feedback model
 
 Continuing in Visual Studio:
 
@@ -592,7 +617,9 @@ Continuing in Visual Studio:
         public string FeedbackText { get; set; }
     }
     ```
-    
+
+### Step 2: Create Feedback handler
+
 1. In the **Custom.Engine.Agent** project, create a new file with the name **FeedbackHandler.cs** with the following contents:
 
     ```csharp
@@ -617,6 +644,8 @@ Continuing in Visual Studio:
         }
     }
     ```
+    
+### Step 2: Enable Feedback Loop feature
 
 Now, update the bot logic.
 
@@ -713,6 +742,8 @@ builder.Services.AddTransient<IBot>(sp =>
 });
 ```
 
+### Step 3: Run and debug
+
 Now let's test the changes.
 
 1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
@@ -722,11 +753,13 @@ Now let's test the changes.
 1. In the repsonse, select either the thumbs up (👍) or thumbs down (👎) icon. A feedback dialog is displayed.
 1. Enter a message into the message box and submit the feedback. Your reaction and feedback text is displayed in a response.
 
-## Customize response
+## Exercise 6: Customize bot response
 
 You've seen so far that Teams AI library provides some user interface components automatically, such as the AI generated label and document citations when you integrated Azure OpenAI On Your Data. Suppose you want more granular control over how responses are represented, for example, you want to display additional controls. Teams AI library allows developers to override the **PredictedSAYCommand** action which is responsible for sending the repsonse from the language model to the Teams user interface.
 
 Here, you'll render the language model response in an Adaptive Card. The Adaptive Card displays the languge model text response and includes controls to display additional citation information.
+
+### Step 1: Create Adaptive Card creator class
 
 Continuing in Visual Studio:
 
@@ -804,6 +837,8 @@ Continuing in Visual Studio:
         }
     }
     ```
+    
+### Step 3: Create Action handler
 
 Next, create an action handler to override the **PredictedSAYCommand** action.
 
@@ -868,9 +903,11 @@ Next, create an action handler to override the **PredictedSAYCommand** action.
     }
     ```
 
-The method is responsible for creating and sending a message activity. If the lnaguage model response includes citations, it creates an adaptive card and attaches it to the message. Otherwise, it sends a simple text message. 
+The method is responsible for creating and sending a message activity. If the language model response includes citations, it creates an adaptive card and attaches it to the message. Otherwise, it sends a simple text message. 
 
 An entity is defined in the activity which represents the AI generated label, and channelData is defined which enables the feedback controls. As we are overriding the default handler, we need to provide these in the activity otherwise they will not be displayed.
+
+### Step 4: Register actions
 
 Next, register the action in the bot code.
 
@@ -949,6 +986,8 @@ Your bot code should look like:
         return app;
     });
     ```
+
+### Step 4: Run and debug
     
 > [!TIP]
 > Your debug session from the previous section should still be running, if not start a new debug session.
@@ -958,11 +997,13 @@ Continuing in the browser:
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 
-## Add sensitivity information
+## Exercise 7: Senstivity information
 
 Not all company data should be shared outside your organsation, some data can be sensitive. As you noted in the previous section, you defined a label in the activity Entities collection which displayed the AI generated label in the response. 
 
 Here, you'll update the entity properties to display a new label to inform users that the information provided may be sensitive and whether or not, and whether it can be shared outside of your organization.
+
+### Step 1: Add sentivity label
 
 Continuing in Visual Studio: 
 
@@ -1006,6 +1047,8 @@ The Entities collection should look like:
     ];
     ```
 
+### Step 2: Run and debug
+
 Now, let's test the change.
 
 > [!TIP]
@@ -1016,11 +1059,13 @@ Continuing in the browser:
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 
-## Add content safety moderation
+## Exercise 8: Content Safety Moderation
 
 The content filtering system integrated into Azure OpenAI Service runs alongside the core models, including DALL-E image generation models. It uses an ensemble of multi-class classification models to detect four categories of harmful content (violence, hate, sexual, and self-harm) at four severity levels respectively (safe, low, medium, and high), and optional binary classifiers for detecting jailbreak risk, existing text, and code in public repositories. The default content filtering configuration is set to filter at the medium severity threshold for all four content harms categories for both prompts and completions. That means that content that is detected at severity level medium or high is filtered, while content detected at severity level low or safe is not filtered by the content filters.
 
 Here, you'll register the Azure Safety Content Moderator to moderate both inputs and output, and add actions to provide custom messages when the content safety measures are triggered.
+
+### Step 1: Add flagged input and output action handlers
 
 Continuing in Visual Studio:
 
@@ -1044,6 +1089,8 @@ Continuing in Visual Studio:
     ```
 1. Save your changes.
 
+### Step 2: Register Azure Content Safety Moderator service
+
 Now, register the Azure Content Safety moderator.
 
 1. Open **Program.cs**.
@@ -1054,7 +1101,7 @@ Now, register the Azure Content Safety moderator.
         new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
     );
     ```
-        
+
 1. In the bot code, update the **AIOptions** object to register the safety moderator with the application.
 
     ```csharp
@@ -1139,6 +1186,8 @@ builder.Services.AddTransient<IBot>(sp =>
     return app;
 });
 ```
+
+### Step 3: Run and debug
 
 Now, let's test the change.
 
