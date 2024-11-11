@@ -23,7 +23,8 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 ### Step 1: Open starter project
 
-TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB-446-BEGIN
+> [!TIP]
+> Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB-446-BEGIN
 
 Start with opening the starter project in Visual Studio 2022.
 
@@ -31,19 +32,19 @@ Start with opening the starter project in Visual Studio 2022.
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
 1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
 1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
-1. Double click **Local Disk (C:)**, then double click **CEA_LAB441-BEGIN** folder.
+1. Double click **Local Disk (C:)**, then double click **LAB-446-BEGIN** folder.
 1. Select **Custom.Engine.Agent.sln**, then select **Open**.
 
 ### Step 2: Examine the solution
 
 The solution contains two projects:
 
-- **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your agent code. The agent logic and generative AI capatbilies are implemented using Teams AI library. 
+- **Custom.Engine.Agent**: This is an ASP.NET Core Web Api which contains your agent code. The agent logic and generative AI capatbilies are implemented using Teams AI library. 
 - **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your agent.
 
 ### Step 3: Create dev tunnel
 
-Dev tunnels allow developers to securely share local web services across the internet. When users interact with the agent in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your agent code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
+Dev tunnels allow developers to securely share local web services across the internet. When users interact with the agent in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your agent code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web api runs on as a publicly accessible URL.
 
 Continue in Visual Studio:
 
@@ -126,7 +127,7 @@ Take a minute to examine the Azure Bot Service resource in the Azure Portal.
 
 With everything in place, we are now ready to test our custom engine agent in Microsoft Teams for the first time.
 
-First, we need to start a debug session to start our local web app that contains the agent logic.
+First, we need to start a debug session to start our local web api that contains the agent logic.
 
 Continue in Visual Studio:
 
