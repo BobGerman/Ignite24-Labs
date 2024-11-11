@@ -11,8 +11,10 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **Create**: Create a custom agent agent project and use Teams Toolkit in Visual Studio.
 - **Prompt template**: Determine the agent behaviour.
 - **Suggested prompts**: Define prompts for starting new conversations.
+- **Message handlers**: Run logic when recieving a specific keyword or phrase.
+- **Chat with your data**: Integrate with Azure AI Search to implement Retrieval Augmentation Generation (RAG).
 - **Feedback**: Collect feedback from end users
-- **Customise responses**: Control the agent response
+- **Customize responses**: Control the agent response
 - **Sensitive information**: Display guidance to end users
 - **Content moderation**: Integrate responsible AI features
 - **Provision**: Upload your custom engine agent to Microsoft Teams and validate the results.
@@ -36,12 +38,12 @@ Start with opening the starter project in Visual Studio 2022.
 
 The solution contains two projects:
 
-- **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your bot code. The bot logic and generative AI capatbilies are implemented using Teams AI library. 
-- **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your bot.
+- **Custom.Engine.Agent**: This is an ASP.NET Core Web App which contains your agent code. The agent logic and generative AI capatbilies are implemented using Teams AI library. 
+- **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your agent.
 
 ### Step 3: Create dev tunnel
 
-Dev tunnels allow developers to securely share local web services across the internet. When users interact with the bot in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your bot code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
+Dev tunnels allow developers to securely share local web services across the internet. When users interact with the agent in Microsoft Teams, the Teams platform will send and recieve messages (called Activities) from your agent code via the Bot Framework. As the code is running on your local machine, the Dev Tunnel exposes the localhost domain which your web app runs on as a publicly accessible URL.
 
 Continue in Visual Studio:
 
@@ -124,7 +126,7 @@ Take a minute to examine the Azure Bot Service resource in the Azure Portal.
 
 With everything in place, we are now ready to test our custom engine agent in Microsoft Teams for the first time.
 
-First, we need to start a debug session to start our local web app that contains the bot logic.
+First, we need to start a debug session to start our local web app that contains the agent logic.
 
 Continue in Visual Studio:
 
@@ -146,15 +148,15 @@ Now let's test that everything is working as expected.
 
 Continuing in the web browser:
 
-1. Enter **Hello, world!** in the message box and press <kbd>Enter</kbd> to send the message to the bot. A typing indicator appears whilst waiting for the  bot to respond.
-1. Notice the natural language response from the bot and a label **AI generated** is shown in the bot response.
-1. Continue a conversation with the bot.
+1. Enter **Hello, world!** in the message box and press <kbd>Enter</kbd> to send the message to the agent. A typing indicator appears whilst waiting for the agent to respond.
+1. Notice the natural language response from the agent and a label **AI generated** is shown in the agent response.
+1. Continue a conversation with the agent.
 1. Go back to Visual Studio. Notice that in the Debug pane, Teams AI library is tracking the full conversation and displays appended conversation history in the output.
 1. Close the browser to stop the debug session.
 
-### Step 4: Examine bot configuration
+### Step 4: Examine agent configuration
 
-The functionality of our bot is implemented using Teams AI library. Let's take a look at how our bot is configured.
+The functionality of our agent is implemented using Teams AI library. Let's take a look at how our agent is configured.
 
 In Visual Studio:
 
@@ -165,10 +167,10 @@ The file sets up the web application and integrates it with Microsoft Bot Framew
 
 - **WebApplicationBuilder**: Initializes web application with controllers and HTTP client services.
 - **Configuration**: Retrieve configuration options from the apps configration and sets up Bot Framework authentication.
-- **Dependency injection**: Registers BotFrameworkAuthentication and TeamsAdapter services. Configures Azure Blob Storage for persisting bot state and sets up an Azure OpenAI model service.
-- **Bot setup**: Registers the bot as a transient service. The bot logic is implemented using Teams AI library.
+- **Dependency injection**: Registers BotFrameworkAuthentication and TeamsAdapter services. Configures Azure Blob Storage for persisting agent state and sets up an Azure OpenAI model service.
+- **Agent setup**: Registers the agent as a transient service. The agent logic is implemented using Teams AI library.
 
-Let's take a look at the bot setup.
+Let's take a look at the agent setup.
 
 ```csharp
 builder.Services.AddTransient<IBot>(sp =>
@@ -206,14 +208,14 @@ builder.Services.AddTransient<IBot>(sp =>
 });
 ```
 
-The key elements of the bot setup are:
+The key elements of the agent setup are:
 
 - **ILoggerFactory**: Used for logging messages to the output pane for debugging.
 - **PromptManager**: Determines the location of prompt templates.
 - **ActionPlanner**: Determines which model and prompt should be used when handling a user message. By default, the planner uses a prompt template named 'Chat'.
 - **ApplicationBuilder**: Creates an object which represents a Bot that can handle incoming activities.
 
-The bot is added as a transient service which means that everytime a message is recieved from the Bot Framework, our bot code will be executed.
+The agent is added as a transient service which means that everytime a message is recieved from the Bot Framework, our agent code will be executed.
 
 ## Exercise 3: Prompt templates
 
@@ -261,7 +263,7 @@ Close the browser to stop the debug session.
 
 ## Excercise 3: Suggested prompts
 
-Suggested prompts are shown in the user interface and a good way for users to discover how the bot can help them through examples.
+Suggested prompts are shown in the user interface and a good way for users to discover how the agent can help them through examples.
 
 Here, you'll define two suggested prompts.
 
@@ -323,7 +325,7 @@ Now let's test the change.
 
 1. In the message box, replace **<role>** with a job title, for example, +++Senior Software Engineer+++, and send the message.
 
-The prompt suggestions can also be seen when the user opens the bot for the first time.
+The prompt suggestions can also be seen when the user opens the agent for the first time.
 
 Continuing in the web browser:
 
@@ -337,15 +339,15 @@ Continuing in the web browser:
 
 ## Exercise 4: Message handlers 
 
-Suppose you want to run some logic when a message that contains a specific phrase or keyword is sent to the bot, a message handler allows you to do that.
+Suppose you want to run some logic when a message that contains a specific phrase or keyword is sent to the agent, a message handler allows you to do that.
 
-Up to this point, every time you send and recieve a message the contents of the messages are saved in the bot state. During development the bot state is stored in an emulated Azure Storage account hosted on your machine. You can inspect the bot state using Azure Storage Explorer. 
+Up to this point, every time you send and recieve a message the contents of the messages are saved in the agent state. During development the agent state is stored in an emulated Azure Storage account hosted on your machine. You can inspect the agent state using Azure Storage Explorer. 
 
 > [!NOTE]
 > Message handlers are processed before the ActionPlanner and so take priority for handling the response.
  
 
-Here, you'll create a message handler that will clear the conversation history stored in the bot state when a message that contains **/new** is sent, and respond with a fixed message.
+Here, you'll create a message handler that will clear the conversation history stored in the agent state when a message that contains **/new** is sent, and respond with a fixed message.
 
 ## Step 1: Create message handler
 
@@ -426,7 +428,7 @@ Continuing in Visual Studio:
    SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
    ```
 
-Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our bot code.
+Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our agent code.
 
 1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
 1. Update the **file/createOrUpdateJsonFile** action:
@@ -568,7 +570,7 @@ Continuing in Visual Studio:
   ```
 1. Save your changes.
 
-The **defaultPrompt** anonymous function provides a way to dyanmically alter the behaviour of our bot. This is where you can include logic to choose different prompt templates for different functions or behaviours that you want the bot to provide. Suppose you want to dynamically adjust the temperature or choose a different prompt template based in a specific input. Here is where you would add the logic to make those changes on the fly.
+The **defaultPrompt** anonymous function provides a way to dyanmically alter the behaviour of our agent. This is where you can include logic to choose different prompt templates for different functions or behaviours that you want the agent to provide. Suppose you want to dynamically adjust the temperature or choose a different prompt template based in a specific input. Here is where you would add the logic to make those changes on the fly.
 
 ### Step 4: Update prompt template
 
@@ -663,10 +665,10 @@ Continuing in Visual Studio:
     
 ### Step 2: Enable Feedback Loop feature
 
-Now, update the bot logic.
+Now, update the agent logic.
 
 1. In the **Custom.Engine.Agent** project, open **Program.cs** file.
-1. In the bot code, create a new **AIOptions** object after the **ActionPlanner** object.
+1. In the agent code, create a new **AIOptions** object after the **ActionPlanner** object.
 
     ```csharp
     AIOptions<TurnState> options = new(planner)
@@ -692,7 +694,7 @@ Now, update the bot logic.
     
 1. Save your changes
 
-Your bot code should look like the following:
+Your agent code should look like the following:
 
 ```csharp
 builder.Services.AddTransient<IBot>(sp =>
@@ -769,7 +771,7 @@ Now let's test the changes.
 1. In the repsonse, select either the thumbs up (👍) or thumbs down (👎) icon. A feedback dialog is displayed.
 1. Enter a message into the message box and submit the feedback. Your reaction and feedback text is displayed in a response.
 
-## Exercise 7: Customize bot response
+## Exercise 7: Customize agent response
 
 You've seen so far that Teams AI library provides some user interface components automatically, such as the AI generated label and document citations when you integrated Azure OpenAI On Your Data. Suppose you want more granular control over how responses are represented, for example, you want to display additional controls. Teams AI library allows developers to override the **PredictedSAYCommand** action which is responsible for sending the repsonse from the language model to the Teams user interface.
 
@@ -925,7 +927,7 @@ An entity is defined in the activity which represents the AI generated label, an
 
 ### Step 4: Register actions
 
-Next, register the action in the bot code.
+Next, register the action in the agent code.
 
 1. In the **Custom.Engine.Agent** project, open **Program.cs** file.
 1. Register the **Actions** class with the application after the feeback loop handler.
@@ -935,7 +937,7 @@ Next, register the action in the bot code.
     ```
 1. Save your changes.
 
-Your bot code should look like:
+Your agent code should look like:
 
     ```csharp
     builder.Services.AddTransient<IBot>(sp =>
@@ -1110,7 +1112,7 @@ Continuing in Visual Studio:
 Now, register the Azure Content Safety moderator.
 
 1. Open **Program.cs**.
-1. Register **AzureContentSafetyModerator** as a service before the bot code. 
+1. Register **AzureContentSafetyModerator** as a service before the agent code. 
 
     ```csharp
     builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
@@ -1118,7 +1120,7 @@ Now, register the Azure Content Safety moderator.
     );
     ```
 
-1. In the bot code, update the **AIOptions** object to register the safety moderator with the application.
+1. In the agent code, update the **AIOptions** object to register the safety moderator with the application.
 
     ```csharp
     AIOptions<TurnState> options = new(planner)
@@ -1129,7 +1131,7 @@ Now, register the Azure Content Safety moderator.
     ```
 1. Save your changes.
 
-The bot code should look like:
+The agent code should look like:
 
 ```csharp
 builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
