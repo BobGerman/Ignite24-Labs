@@ -116,7 +116,7 @@ In Visual Studio Code:
 
     !IMAGE[provision.png](instructions275666/provision.png)
 
-1. In the prompt, select **Sign in** and follow the prompts to sign in to your Microsoft 365 tenant using Teams Toolkit. The provisioning process starts automatically after you sign in.
+1. In the prompt, select **Sign in** and follow the prompts to sign in to your Microsoft 365 tenant using Teams Toolkit. The provisioning process starts automatically after you sign in. As a reminder, your username is **Username: +++@lab.CloudPortalCredential(User1).Username+++** and your password is **Password: +++@lab.CloudPortalCredential(User1).Password+++**. 
 
     !IMAGE[provision-sign-in.png](instructions275666/provision-sign-in.png)
 
@@ -458,6 +458,8 @@ In Visual Studio Code:
 1. Wait for the upload to complete.
 1. In the **Activity Bar**, switch to the **Run and Debug** view.
 1. Select the **Start Debugging** button next to the configuration's dropdown, or press <kbd>F5</kbd>. A new browser window is launched and navigates to Microsoft 365 Copilot.
+
+If you are prompted to log in, choose "Work and School" account and use your lab assigned username **Username: +++@lab.CloudPortalCredential(User1).Username+++** and password **Password: +++@lab.CloudPortalCredential(User1).Password+++** .
 
 Next, test your declarative agent in Microsoft 365 and validate the results.
 
