@@ -423,7 +423,7 @@ Continuing in Visual Studio:
   ```
 
 1. Save your changes.
-1. Open the **env.local.user** file and add the following:
+1. Open the **env.local.user** file and add a new variable, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys)::
 
    ```
    SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
