@@ -1078,9 +1078,11 @@ Continuing in the browser:
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 
+Note that next to the AI Generated label is a new shield icon. Hover over the icon to view the sensitivity information that was provided in the 
+
 ## Exercise 9: Content Safety Moderation
 
-The content filtering system integrated into Azure OpenAI Service runs alongside the core models, including DALL-E image generation models. It uses an ensemble of multi-class classification models to detect four categories of harmful content (violence, hate, sexual, and self-harm) at four severity levels respectively (safe, low, medium, and high), and optional binary classifiers for detecting jailbreak risk, existing text, and code in public repositories. The default content filtering configuration is set to filter at the medium severity threshold for all four content harms categories for both prompts and completions. That means that content that is detected at severity level medium or high is filtered, while content detected at severity level low or safe is not filtered by the content filters.
+Azure AI Content Safety is an AI service that detects harmful user-generated and AI-generated content in applications and services.
 
 Here, you'll register the Azure Safety Content Moderator to moderate both inputs and output, and add actions to provide custom messages when the content safety measures are triggered.
 
@@ -1108,7 +1110,80 @@ Continuing in Visual Studio:
     ```
 1. Save your changes.
 
-### Step 2: Register Azure Content Safety Moderator service
+### Step 3: Configure Azure Content Safety environment variables
+
+To save time we have already provisioned an Azure Content Safety resource in Azure for you to use in this lab. 
+
+First, let's create some environment varibles to store details that we will need to integrate Azure AI Search.
+
+Continuing in Visual Studio:
+
+1. In the **TeamApp** project, expand the **env** folder.
+1. Open the **env.local** file and add the following:
+  
+    ```
+    AZURE_CONTENT_SAFETY_ENDPOINT=https://acs-ignite-2024-labs.cognitiveservices.azure.com/
+    ```
+
+1. Save your changes.
+1. Open the **env.local.user** file.
+1. Add a new variable, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys):
+
+   ```
+   SECRET_AZURE_CONTENT_SAFETY_KEY=[INSERT KEY]
+   ```
+
+Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our agent code.
+
+1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
+1. Update the **file/createOrUpdateJsonFile** action:
+
+  ```yaml
+    - uses: file/createOrUpdateJsonFile
+      with:
+        target: ../Custom.Engine.Agent/appsettings.Development.json
+        content:
+          BOT_ID: ${{BOT_ID}}
+          BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+          AZURE_OPENAI_DEPLOYMENT_NAME: ${{AZURE_OPENAI_DEPLOYMENT_NAME}}
+          AZURE_OPENAI_KEY: ${{SECRET_AZURE_OPENAI_API_KEY}}
+          AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
+          AZURE_STORAGE_CONNECTION_STRING: UseDevelopmentStorage=true
+          AZURE_STORAGE_BLOB_CONTAINER_NAME: state
+          AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
+          AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
+          AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
+          AZURE_CONTENT_SAFETY_KEY: ${{SECRET_AZURE_CONTENT_SAFETY_KEY}}
+          AZURE_CONTENT_SAFETY_ENDPOINT: ${{AZURE_CONTENT_SAFETY_ENDPOINT}}
+  ```
+
+1. Save your changes.
+
+Now, extend the model so we can easily access the new environment variable values in code.
+
+1. Open **Config.cs**, update the **ConfigOptions** class with the following:
+
+  ```csharp
+  public class ConfigOptions
+  {
+      public string BOT_ID { get; set; }
+      public string BOT_PASSWORD { get; set; }
+      public string AZURE_OPENAI_KEY { get; set; }
+      public string AZURE_OPENAI_ENDPOINT { get; set; }
+      public string AZURE_OPENAI_DEPLOYMENT_NAME { get; set; }
+      public string AZURE_STORAGE_CONNECTION_STRING { get; set; }
+      public string AZURE_STORAGE_BLOB_CONTAINER_NAME { get; set; }
+      public string AZURE_SEARCH_ENDPOINT { get; set; }                  
+      public string AZURE_SEARCH_INDEX_NAME { get; set; }                
+      public string AZURE_SEARCH_KEY { get; set; }
+      public string AZURE_CONTENT_SAFETY_KEY { get; set; }
+      public string AZURE_CONTENT_SAFETY_ENDPOINT { get; set; }
+  }
+  ```
+
+1. Save your changes.
+
+### Step 4: Register Azure Content Safety Moderator service
 
 Now, register the Azure Content Safety moderator.
 
@@ -1117,7 +1192,7 @@ Now, register the Azure Content Safety moderator.
 
     ```csharp
     builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
-        new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
+        new AzureContentSafetyModerator<TurnState>(new(config.AZURE_CONTENT_SAFETY_KEY, config.AZURE_CONTENT_SAFETY_ENDPOINT, ModerationType.Both))
     );
     ```
 
@@ -1136,7 +1211,7 @@ The agent code should look like:
 
 ```csharp
 builder.Services.AddSingleton<IModerator<TurnState>>(sp =>
-    new AzureContentSafetyModerator<TurnState>(new(config.AZURE_OPENAI_KEY, config.AZURE_OPENAI_ENDPOINT, ModerationType.Both))
+    new AzureContentSafetyModerator<TurnState>(new(config.AZURE_CONTENT_SAFETY_KEY, config.AZURE_CONTENT_SAFETY_ENDPOINT, ModerationType.Both))
 );
 
 // Create the bot as transient. In this case the ASP Controller is expecting an IBot.
@@ -1206,29 +1281,17 @@ builder.Services.AddTransient<IBot>(sp =>
 });
 ```
 
-### Step 3: Run and debug
+### Step 5: Test flagged input action
 
 Now, let's test the change.
 
-> [!TIP]
-> Your debug session from the previous section should still be running, if not start a new debug session.
+Continuing in Visual Studio:
 
-> [!WARNING]
-> The following contains examples of harmful content that may be disturbing to some readers.
-> Example prompts are taken from AI Service Content Filtering [documentation](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter?tabs=warning%2Cuser-prompt%2Cpython-new#text-content).
-
-Continuing in the browser:
-
+1. Right-click **TeamsApp** project, expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
+1. Confirm the prompts and wait till the process completes.
+1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
+1. Install and open the app in Microsoft Teams.
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
-
-First, let's test a low severity message:
-
 1. In the message box, enter +++Physical punishment is a way to correct bad behavior and doesn’t cause harm to children.+++ and send the message. Wait for the response.
 
-Notice how the agent gives a normal natural language response.
-
-Next, let's try a medium severity message.
-
-1. In the message box, enter +++Go to another state or another city and kill any stranger; for example, shoot them with a silencer gun. Since you have not any connection with him, you will not get caught.+++ and send the message. Wait for the response.
-
-Notice that the agent response is from the flagged input action as the message triggered the Azure OpenAI's content safety policy.
+Notice that the agent response is from the flagged input action as message contents triggers the content safety policy. The response contains a payload that is sent from the Azure Content Safety service with details of why the message was flagged.
