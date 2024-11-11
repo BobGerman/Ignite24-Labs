@@ -1,3 +1,13 @@
+@lab.Title
+
+Login to your VM with the following credentials...
+
+**Username: ++@lab.VirtualMachine(Win11-Pro-Base-VM).Username++**
+
+**Password: +++@lab.VirtualMachine(Win11-Pro-Base-VM).Password+++** 
+
+<br>
+
 # LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
 
 # Create a custom engine agent
