@@ -15,7 +15,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 ## Open starter project
 
-TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB446-BEGIN
+TODO: Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB-446-BEGIN
 
 Start with opening the starter project in Visual Studio 2022.
 
