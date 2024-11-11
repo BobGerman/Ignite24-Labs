@@ -16,8 +16,8 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 - **Chat with your data**: Integrate with Azure AI Search to implement Retrieval Augmentation Generation (RAG).
 - **Feedback**: Collect feedback from end users.
 - **Customize responses**: Customize the agent response.
-- **Sensitive information**: Display guidance to end users.
-- **Content moderation**: Integrate responsible AI features.
+- **Sensitive information**: Display sensitivity guidance to end users.
+- **Content moderation**: Integrate Azure Content Safety service to detect harmful user-generated and AI-generated content.
 
 ## Exercise 1: Setup project in Visual Studio 2022
 
