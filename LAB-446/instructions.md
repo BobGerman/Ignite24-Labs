@@ -1100,7 +1100,7 @@ Continuing in Visual Studio:
         await turnContext.SendActivityAsync($"I'm sorry your message was flagged: {entitiesJsonString}");
         return string.Empty;
     }
-
+    
     [Action(AIConstants.FlaggedOutputActionName)]
     public static async Task<string> OnFlaggedOutput([ActionTurnContext] ITurnContext turnContext)
     {
@@ -1129,16 +1129,16 @@ Continuing in Visual Studio:
 1. Open the **env.local.user** file.
 1. Add a new variable, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys):
 
-   ```
-   SECRET_AZURE_CONTENT_SAFETY_KEY=[INSERT KEY]
-   ```
+    ```
+    SECRET_AZURE_CONTENT_SAFETY_KEY=[INSERT KEY]
+    ```
 
 Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our agent code.
 
 1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
 1. Update the **file/createOrUpdateJsonFile** action:
 
-  ```yaml
+    ```yaml
     - uses: file/createOrUpdateJsonFile
       with:
         target: ../Custom.Engine.Agent/appsettings.Development.json
@@ -1155,7 +1155,7 @@ Next, let's make sure that these value are written to the **appsettings.developm
           AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
           AZURE_CONTENT_SAFETY_KEY: ${{SECRET_AZURE_CONTENT_SAFETY_KEY}}
           AZURE_CONTENT_SAFETY_ENDPOINT: ${{AZURE_CONTENT_SAFETY_ENDPOINT}}
-  ```
+    ```
 
 1. Save your changes.
 
@@ -1163,9 +1163,9 @@ Now, extend the model so we can easily access the new environment variable value
 
 1. Open **Config.cs**, update the **ConfigOptions** class with the following:
 
-  ```csharp
-  public class ConfigOptions
-  {
+    ```csharp
+    public class ConfigOptions
+    {
       public string BOT_ID { get; set; }
       public string BOT_PASSWORD { get; set; }
       public string AZURE_OPENAI_KEY { get; set; }
@@ -1178,8 +1178,8 @@ Now, extend the model so we can easily access the new environment variable value
       public string AZURE_SEARCH_KEY { get; set; }
       public string AZURE_CONTENT_SAFETY_KEY { get; set; }
       public string AZURE_CONTENT_SAFETY_ENDPOINT { get; set; }
-  }
-  ```
+    }
+    ```
 
 1. Save your changes.
 
