@@ -239,6 +239,9 @@ By default, a declarative agent isn't connected to any data sources. You configu
 In a web browser:
 
 1. In the address bar, type +++https://lodsprodmca.sharepoint.com/sites/productmarketing+++ and navigate to the Product marketing SharePoint site.
+
+> NOTE: The site is called "productmarketing" even though it's a product support agent. Please suspend disbelief; this is only a lab!
+
 1. In the left hand menu, select **Documents** to view the documents
 1. Examine the documents contents
 
@@ -247,7 +250,6 @@ Configure the Documents document library in the Product marketing SharePoint sit
 In Visual Studio Code:
 
 1. In the **appPackage** folder, open **declarativeAgent.json** file.
-1. Just to keep track of the changes, change the name to "Product support 2"
 1. Add the following code snippet to the file:
 
     ```json
@@ -271,7 +273,7 @@ The **declarativeAgent.json** file should look like this:
 {
     "$schema": "https://developer.microsoft.com/json-schemas/copilot/declarative-agent/v1.0/schema.json",
     "version": "v1.0",
-    "name": "Product support 2",
+    "name": "Product support",
     "description": "Product support agent that can help answer customer queries about Contoso Electronics products",
     "instructions": "$[file('instruction.txt')]",
     "capabilities": [
@@ -286,6 +288,14 @@ The **declarativeAgent.json** file should look like this:
     ]
 }
 ```
+
+#### Step W: Workaround for issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.local** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
 
 #### Step 3: Package and upload the declarative agent to Microsoft 365
 
@@ -445,6 +455,14 @@ The **declarativeAgent.json** file should look like this:
 }
 ```
 
+#### Step W: Workaround for issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.local** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
+
 #### Step 2: Upload and run your agent
 
 Next, upload your changes and start a debug session.
@@ -515,6 +533,9 @@ Continue in Visual Studio:
 1. In the **Dev Tunnels** pane, select the **plus (+)** icon.
 
 !IMAGE[create-complete.png](instructions275666/lab-441-vs-devtunnels.png)
+
+If you are prompted to log in, use your Microsoft 365 credentials (username is **Username: +++@lab.CloudPortalCredential(User1).Username+++** and 
+password is **Password: +++@lab.CloudPortalCredential(User1).Password+++**).
 
 1. In the dialog window, create the tunnel using the following settings:
     1. **Account**: Select Add an account in the dropdown and follow the sign in for workplace or school account 

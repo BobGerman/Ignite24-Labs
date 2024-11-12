@@ -187,6 +187,16 @@ The final **trey-declarative-agent.json** file should look like this:
 }
 ~~~
 
+NOTE: The completed solution can be found in C:\Users\LabUser\TeamsApps\Lab-445-Completed on your workstation if you want to copy or compare with the final source code.
+
+#### Step W: Workaround for issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.local** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
+
 ### Step 4: Test in Copilot
 
 Now press F5 or the arrow button to start the debugger again. 
@@ -943,6 +953,14 @@ Paste this above the closing bracket, including the comma which closes the `"cha
 
 Again, please double check your nesting and commas as editing large JSON files can be tricky! The correctly modified file is on your lab workstation in **C:\Users\LabUser\TeamsApps\Lab-445-Completed\appPackage/trey-plugin.json**.
 
+#### Step W: Workaround for issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.local** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
+
 ### Step 5: Test the API
 
 Now restart the debugger. Although the code is updated automatically, you need to completely restart it to force it to redeploy the app package, which now contains more details.
@@ -962,9 +980,9 @@ You should get back ten projects.
 With the debugger still running, restore your debug browser session. Open Copilot and the Trey Genie declarative agent.
 Here are a couple of prompts to try:
 
-* "What projects is Trey Resarch working on now?" (should return all the projects)
-* "Please add Domi as a designer on the Contoso project. Forecast 30 hours for her work." (should show a confirmation card, then add Domi to the project)
-* "What projects is Domi working on?" (should now include the Contoso project).
+* +++What projects is Trey Resarch working on now?+++ (should return all the projects)
+* +++Please add Domi as a designer on the Contoso project. Forecast 30 hours for her work.+++ (should show a confirmation card, then add Domi to the project)
+* +++What projects is Domi working on?+++ (should now include the Contoso project).
 
 # Congratulations!
 
