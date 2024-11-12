@@ -75,7 +75,7 @@ The value of the **instructions** property contains a reference to a file named 
 
 - In the **appPackage** folder, open the **instruction.txt** file and review the contents:
 
-```text
+```md
 You are a declarative agent and were created with Team Toolkit. You should start every response and answer to the user with "Thanks for using Teams Toolkit to create your declarative agent!\n\n" and then answer the questions and help the user.
 ```
 
@@ -140,7 +140,7 @@ In Visual Studio Code:
 
     !IMAGE[debug-open.png](instructions275666/debug-open.png)
 
-1. Select the **Start Debugging** button next to the configuration's dropdown, or press <kbd>F5</kbd>. A new browser window is launched and navigates to Microsoft 365 Copilot.
+1. Select the **Start Debugging** button next to the configuration's dropdown, or press <kbd>F5</kbd>. A new browser window is launched and navigates to Microsoft 365 Copilot. If you are prompted to log in, choose "Work and School" account and use your lab assigned username **Username: +++@lab.CloudPortalCredential(User1).Username+++** and password **Password: +++@lab.CloudPortalCredential(User1).Password+++** .
 
     !IMAGE[debug-start.png](instructions275666/debug-start.png)
 
@@ -158,7 +158,7 @@ Continuing in the browser, let's test the **in-context** experience.
 
     !IMAGE[test-in-context-agent.png](instructions275666/test-in-context-agent.png)
 
-1. In the text box, enter **What can you do?** and submit your message.
+1. In the text box, enter +++What can you do?+++ and submit your message.
 
     !IMAGE[test-in-context-message.png](instructions275666/test-in-context-message.png)
 
@@ -186,7 +186,7 @@ Continuing in the browser:
 
     !IMAGE[test-immersive.png](instructions275666/test-immersive.png)
 
-1. Select the sample prompt with the title **Learn more**. Notice that the text **What can you do?** is added to the message box for you.
+1. Select the sample prompt with the title **Learn more**. Notice that the text +++What can you do?+++ is added to the message box for you.
 
     !IMAGE[test-immersive-learn-more.png](instructions275666/test-immersive-learn-more.png)
 
@@ -221,7 +221,7 @@ In Visual Studio Code:
 1. Open the **appPackage/instruction.txt** file and update the contents with:
 
     ```md
-    You are Product Support, an intelligent assistant designed to answer customer queries about Contoso Electronics products, repairs, returns, and warranties. You will use documents from Product support SharePoint site as your source of information. If you can't find the necessary information, you should suggest that the agent should reach out to the team responsible for further assistance. Your responses should be concise and always include a cited source.
+    You are Product Support, an intelligent assistant designed to answer customer queries about Contoso Electronics products, repairs, returns, and warranties. You will use documents from Product marketing SharePoint site as your source of information. If you can't find the necessary information, you should suggest that the agent should reach out to the team responsible for further assistance. Your responses should be concise and always include a cited source.
     ```
 
 1. Save your changes.
@@ -238,28 +238,28 @@ By default, a declarative agent isn't connected to any data sources. You configu
 
 In a web browser:
 
-1. In the address bar, type +++https://lodsprodmca.sharepoint.com/sites/productmarketing+++ and navigate to the Product support SharePoint site
+1. In the address bar, type +++https://lodsprodmca.sharepoint.com/sites/productmarketing+++ and navigate to the Product marketing SharePoint site.
 1. In the left hand menu, select **Documents** to view the documents
 1. Examine the documents contents
 
-Configure the Documents document library in the Product support SharePoint site as a source of grounding data in the declarative agent manifest.
+Configure the Documents document library in the Product marketing SharePoint site as a source of grounding data in the declarative agent manifest.
 
 In Visual Studio Code:
 
 1. In the **appPackage** folder, open **declarativeAgent.json** file.
 1. Just to keep track of the changes, change the name to "Product support 2"
-1. Add the following code snippet to the file, replacing **{URL}** with the direct URL to the **Products** folder in OneDrive that you copied and stored in a text editor earlier:
+1. Add the following code snippet to the file:
 
     ```json
     "capabilities": [
-        {
-            "name": "OneDriveAndSharePoint",
-            "items_by_url": [
-                {
-                    "url": "https://lodsprodmca.sharepoint.com/sites/productsupport/Shared%20Documents"
-                }
-            ]
-        }
+      {
+        "name": "OneDriveAndSharePoint",
+        "items_by_url": [
+          {
+            "url": "https://lodsprodmca.sharepoint.com/sites/productmarketing/Shared%20Documents"
+          }
+        ]
+      }
     ]
     ```
 
@@ -279,7 +279,7 @@ The **declarativeAgent.json** file should look like this:
             "name": "OneDriveAndSharePoint",
             "items_by_url": [
                 {
-                    "url": "https://lodsprodmca.sharepoint.com/sites/productsupport/Shared%20Documents"
+                    "url": "https://lodsprodmca.sharepoint.com/sites/productmarketing/Shared%20Documents"
                 }
             ]
         }
@@ -326,26 +326,26 @@ In Visual Studio Code:
 
 Next, let's test the grounding data.
 
-1. In the message box, enter **Tell me about Eagle Air** and send the message.
-1. Wait for the response. Notice that the response contains information about the Eagle Air drone. The response contains citations and references to the Eagle Air document stored on the Product support SharePoint Online site.
+1. In the message box, enter +++Tell me about Eagle Air+++ and send the message.
+1. Wait for the response. Notice that the response contains information about the Eagle Air drone. The response contains citations and references to the Eagle Air document stored on the Product marketing SharePoint Online site.
 
     !IMAGE[test-product-info.png](instructions275666/test-product-info.png)
 
 Let's try a few more prompts:
 
-1. In the message box, enter **Recommend a product suitable for a farmer** and send the message.
-1. Wait for the response. Notice that the response contains information about the Eagle Air and some extra context as to why the Eagle Air is recommended. The response contains citations and references to the Eagle Air document stored on the Product support SharePoint Online site.
+1. In the message box, enter +++Recommend a product suitable for a farmer+++ and send the message.
+1. Wait for the response. Notice that the response contains information about the Eagle Air and some extra context as to why the Eagle Air is recommended. The response contains citations and references to the Eagle Air document stored on the Product marketing SharePoint Online site.
 
     !IMAGE[test-product-recommendation.png](instructions275666/test-product-recommendation.png)"
 
-1. In the message box, enter **Explain why the Eagle Air is more suitable than Contoso Quad** and send the message.
+1. In the message box, enter +++Explain why the Eagle Air is more suitable than Contoso Quad+++ and send the message.
 1. Wait for the response. Notice that the response explains in more detail why the Eagle Air is more suitable than the Contoso Quad for use by farmers.
 
     !IMAGE[test-product-explanation.png](instructions275666/test-product-explanation.png)
 
 Finally, let's test the fallback response by asking a question that the agent can't answer:
 
-1. In the message box, enter **When was Mark8 released?** and send the message.
+1. In the message box, enter +++When was Mark8 released?+++ and send the message.
 1. Wait for the response. Notice that the response suggests that the agent should reach out to the team responsible for further assistance as defined in the instructions.
 
   !IMAGE[test-fallback.png](instructions275666/test-fallback.png)
@@ -411,7 +411,7 @@ The **declarativeAgent.json** file should look like this:
       "name": "OneDriveAndSharePoint",
       "items_by_url": [
         {
-          "url": "https://lodsprodmca.sharepoint.com/sites/productsupport/Shared%20Documents"
+          "url": "https://lodsprodmca.sharepoint.com/sites/productmarketing/Shared%20Documents"
         }
       ]
     }
@@ -489,7 +489,7 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 You can find the project on your lab workstation at C:\Users\LabUser\TeamsApps\cea-career-genie. The first step is to open the starter project in Visual Studio 2022.
 
-1. Open **Visual Studio 2022** (the purple one).
+1. Open **Visual Studio 2022** (the purple one)
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
 
 !IMAGE[create-complete.png](instructions275666/lab-441-vs-continuewithoutcode.png)
@@ -533,7 +533,8 @@ Continue in Visual Studio:
 1. In the **TeamsApp** project, expand the **env** folder.
 1. Rename **.env.local.user.sample** to **.env.local.user**.
 1. Open **.env.local.user** file.
-1. Update the contents of the file, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys):
+1. Update the contents of the file, replacing [INSERT KEY] with the value in this Github gist:
++++https://gist.github.com/garrytrinder/0da49ec4ba50b023e5b75a1c14fa1f22+++
 
     ```text
     SECRET_AZURE_OPENAI_API_KEY=[INSERT KEY]
@@ -788,7 +789,7 @@ Continuing in Visual Studio:
 
 !IMAGE[create-complete.png](instructions275666/lab441-view-prompts.png)
 
-1. In the message box, replace **<role>** with a job title, for example, Senior Software Engineer, and send the message.
+1. In the message box, replace **<role>** with a job title, for example, +++Senior Software Engineer+++, and send the message.
 
 > [!NOTE]
 > The suggested prompts can also be seen when the user opens the agent for the first time.

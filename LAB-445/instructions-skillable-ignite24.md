@@ -1,6 +1,22 @@
+@lab.Title
+
+Use this account to log into Windows:
+
+**Username: ++@lab.VirtualMachine(Win11-Pro-Base-VM).Username++**
+
+**Password: +++@lab.VirtualMachine(Win11-Pro-Base-VM).Password+++** 
+
+<br>
+
+Use this account to log into Microsoft 365:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
+
 # Lab 445 - Build Declarative Agents for Microsoft 365 Copilot
 
-In this lab you will build a declarative agent that assists employees of a fictitous consulting company called Trey Research. Like all declarative agents, this will use the AI models and orchestration that's built into Microsoft 365 to provide a specialized Copilot experience that focuses on information about consultants, billing, and projects.
+In this lab you will build a declarative agent that assists employees of a fictitous consulting company called Trey Research. Like all declarative agents, this will use the AI model's and orchestration that's built into Microsoft 365 to provide a specialized Copilot experience that focuses on information about consultants, billing, and projects.
 
 To make it easier, we will begin with a working declarative agent and API plugin. These are similar to what you'd get in a new project generated with Teams Toolkit, however there is a working database and sample data to work with.
 
@@ -25,11 +41,17 @@ In the exercises that follow, you will:
 
  Open the Teams Toolkit tab on the left 1️⃣ and under "Accounts", click "Sign in to Microsoft 365" 2️⃣.
 
- ![Sign into Teams Toolkit](./images/01-04-Setup-TTK-01.png)
+!IMAGE[01-04-Setup-TTK-01.png](instructions276847/01-04-Setup-TTK-01.png)
+
+Sign in using a "Work and School" account; as a reminder here are your login credentials for the lab tenant:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
 
 You may be asked to set up multi-factor authentication (MFA) at this point; if so, follow the steps as prompted until you are able to log in. Ensure that the "Custom app upload enabled" and "Copilot access enabled" checkboxes are checked (it takes a moment) before proceeding.
 
- ![Check services are enabled](./images/run-in-ttk01.png)
+!IMAGE[run-in-ttk01.png](instructions276847/run-in-ttk01.png)
 
 ### Step 2: Set up the local environment files
 
@@ -43,11 +65,17 @@ SECRET_STORAGE_ACCOUNT_CONNECTION_STRING=UseDevelopmentStorage=true
 
 Press F5 or hover over the "local" environment and click the debugger symbol that will be displayed 1️⃣ and then select "debug in Microsft Edge" 2️⃣.
 
-![Start debugger](./images/run-in-ttk02.png)
+!IMAGE[run-in-ttk02.png](instructions276847/run-in-ttk02.png)
 
 It will take a while. If you get an error about not being able to run the "Ensure database" script, please try a 2nd time as this is a timing issue waiting for the Azure storage emulator to run for the first time.
 
 The Edge browser should open to the Copilot "Bizchat" page.
+
+If you are prompted to log in, choose "work and school" account and use these credentials:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
 
 Minimize the browser so you can test the API locally. (Don't close the browser or you will exit the debug session!)
 
@@ -57,11 +85,11 @@ Before proceeding, ensure the log file is in view by opening the "Debug console"
 
 Now click the "Send Request" link in treyResearchAAPI.http just above the link {{base_url}}/me 6️⃣.
 
-![Test the /me API call](./images/run-in-ttk04.png)
+!IMAGE[run-in-ttk04.png](instructions276847/run-in-ttk04.png)
 
 You should see the response in the right panel, and a log of the request in the bottom panel. The response shows the information about the logged-in user, but since we haven't implemented authentication as yet (that's coming in Lab 6), the app will return information on the fictitious consultant "Avery Howard". Take a moment to scroll through the response to see details about Avery, including a list of project assignments.
 
-![View API results](./images/run-in-ttk05.png)
+!IMAGE[run-in-ttk05.png](instructions276847/run-in-ttk05.png)
 
 Try some more API calls to familiarize yourself with the API and the data.
 
@@ -71,7 +99,7 @@ Now restore the browser window you minimized in Step 3. You should see the Micro
 
 Open the right flyout 1️⃣ and, if necessary, click "Show more"2️⃣ to reveal all the choices. Then choose "Trey Genie local"3️⃣, which is the agent you just installed.
 
-![Open the declarative agent](./images/run-declarative-copilot-01.png)
+!IMAGE[run-declarative-copilot-01.png](instructions276847/run-declarative-copilot-01.png)
 
 Try one of the prompt suggestions such as, "Find consultants with TypeScript skills." You should see two consultants, Avery Howard and Sanjay Puranik, with additional details from the database.
 
@@ -98,7 +126,7 @@ Be sure to remind users of the Trey motto, 'Always be Billing!'.
 
 In a web browser, open the site https://lodsprodmca.sharepoint.com/sites/TreyLegalDocuments. You may need to log in again. When you see the site home page, click on "Documents" to view the Trey Research legal documents. Notice that it contains contracts for two consulting engagements, Bellows College and Woodgrove Bank.
 
-![SharePoint files](./images/sharepoint-docs.png)
+!IMAGE[sharepoint-docs.png](instructions276847/sharepoint-docs.png)
 
 ### Step 3: Add the SharePoint capability
 
@@ -937,3 +965,12 @@ Here are a couple of prompts to try:
 * "What projects is Trey Resarch working on now?" (should return all the projects)
 * "Please add Domi as a designer on the Contoso project. Forecast 30 hours for her work." (should show a confirmation card, then add Domi to the project)
 * "What projects is Domi working on?" (should now include the Contoso project).
+
+# Congratulations!
+
+---
+You have completed Lab 445 and built a Declarative agent with an API plugin.
+If you want to learn more, including how to add API authentication to your project, you can find a deeper dive into this and other examples at [https://aka.ms/copilotdevcamp](https://aka.ms/copilotdevcamp).
+
+What cool prompts can you think of that weren't mentioned in the lab instructions?
+
