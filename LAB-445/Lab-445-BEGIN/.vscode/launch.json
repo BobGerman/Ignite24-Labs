@@ -13,7 +13,8 @@
                 "group": "all",
                 "hidden": true
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Terminate All Tasks"
         },
         {
             "name": "Launch App in Teams (Chrome)",
@@ -27,7 +28,8 @@
                 "group": "all",
                 "hidden": true
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Terminate All Tasks"
         },
         {
             "name": "Preview in Copilot (Edge)",
@@ -38,7 +40,8 @@
                 "group": "remote",
                 "order": 1
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Terminate All Tasks"
         },
         {
             "name": "Preview in Copilot (Chrome)",
@@ -49,7 +52,8 @@
                 "group": "remote",
                 "order": 2
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Terminate All Tasks"
         },
         {
             "name": "Attach to Backend",
@@ -61,7 +65,8 @@
                 "group": "all",
                 "hidden": true
             },
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "postDebugTask": "Terminate All Tasks"
         }
     ],
     "compounds": [
