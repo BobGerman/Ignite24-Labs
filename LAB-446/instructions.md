@@ -6,7 +6,15 @@ Login to your VM with the following credentials...
 
 **Password: +++@lab.VirtualMachine(Win11-Pro-Base-VM).Password+++** 
 
+Use this account to log into Microsoft 365:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
+
 <br>
+
+---
 
 # LAB 446 - Build Custom Engine Agents for Microsoft 365 Copilot
 
@@ -33,23 +41,21 @@ Here, you create a custom engine agent that uses a language model hosted in Azur
 
 ### Step 1: Open starter project
 
-> [!TIP]
-> Save the starter project to C:\, you can get the starting code from https://download-directory.github.io/?url=https://github.com/BobGerman/Ignite24-Labs/tree/main/LAB-446/LAB-446-BEGIN
-
 Start with opening the starter project in Visual Studio 2022.
 
-1. Open **Visual Studio 2022**
+1. Open **Visual Studio 2022**.
 1. In the Visual Studio 2022 welcome dialog, select **Continue without code**.
 1. Open the **File** menu, expand the **Open** menu and select **Project/solution...**.
-1. In the Open Project/Solution file picker, on the left hand menu, select **This PC**.
-1. Double click **Local Disk (C:)**, then double click **LAB-446-BEGIN** folder.
-1. Select **Custom.Engine.Agent.sln**, then select **Open**.
+1. In the **Open Project/Solution** file picker, on the left hand menu, select **This PC**.
+1. Double click **Local Disk (C:)**.
+1. Navigate to **C:\Users\LabUser\LAB-466-BEGIN** folder.
+1. In the **LAB-466-BEGIN** folder, select **Custom.Engine.Agent.sln**, then select **Open**.
 
 ### Step 2: Examine the solution
 
 The solution contains two projects:
 
-- **Custom.Engine.Agent**: This is an ASP.NET Core Web Api which contains your agent code. The agent logic and generative AI capatbilies are implemented using Teams AI library. 
+- **Custom.Engine.Agent**: This is an ASP.NET Core Web API project which contains your agent code. The agent logic and generative AI capatbilies are implemented using Teams AI library. 
 - **TeamsApp**: This is a Teams Toolkit project which contains the app package files, environment, workflow and infrastructure files. You will use this project to provision the required resources for your agent.
 
 ### Step 3: Create dev tunnel
@@ -60,8 +66,6 @@ Continue in Visual Studio:
 
 1. Open the **View** menu, expand **Other windows**, and select **Dev Tunnels**.
 1. In the **Dev Tunnels** pane, select the **plus (+)** icon.
-
-![Open dev tunnel in Visual Studio](./images/lab-441-vs-devtunnels.png)
 
 1. In the dialog window, create the tunnel using the following settings:
     1. **Account**: Select Add an account in the dropdown and follow the sign in for workplace or school account 
@@ -75,12 +79,18 @@ Continue in Visual Studio:
 
 To save time we have already provisioned a language model in Azure for you to use in this lab. Teams Toolkit uses environment (.env) files to store values centrally that can be used across your application.
 
+In a web browser:
+
+1. In the address bar, type +++https://gist.github.com/garrytrinder/0da49ec4ba50b023e5b75a1c14fa1f22+++ and navigate to a GitHub gist containing environment variables.
+1. Copy the value of the **SECRET_AZURE_OPENAI_API_KEY** variable to your clipboard.
+
 Continue in Visual Studio:
 
 1. In the **TeamsApp** project, expand the **env** folder.
-1. Rename **.env.local.user.sample** to **.env.local**.
+1. Rename **.env.local.user.sample** to **.env.local.user**.
 1. Open **.env.local.user** file.
-1. Update the contents of the file, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys):
+
+1. Update the contents of the file, replacing [INSERT KEY] with the value stored in your clipboard.
 
     ```text
     SECRET_AZURE_OPENAI_API_KEY=[INSERT KEY]
@@ -89,11 +99,11 @@ Continue in Visual Studio:
 1. Save the changes.
 
 > [!NOTE]
->  When Teams Toolkit uses an environment variable with that is prefixed with **SECRET**, it will ensure that the value does not appear in any logs. 
+> When Teams Toolkit uses an environment variable with that is prefixed with **SECRET**, it will ensure that the value does not appear in any logs. 
 
 ## Exercise 2: Provision resources
 
-Teams Toolkit help developers automate tasks using workflow files. The workflow files are YML files which are stored in the root of the TeamsApp project.
+Teams Toolkit help developers automate tasks using workflow files. The workflow files are YML files which are stored in the root of the TeamsApp project. 
 
 ### Step 1: Review Teams Toolkit provisioning tasks
 
@@ -118,9 +128,6 @@ The file contains a single stage called **Provision** which contains several tas
 
 1. Right-click **TeamsApp** project.
 1. Expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
-
-![Prepare Teams App Dependencies](./images/lab441-prepare-teams-app-dependencies.png)
-
 1. In the **Microsoft 365 account** dialog, select the account you used to create the Dev Tunnel earlier and select **Continue**. This will start the Dev Tunnel and write the tunnel endpoint and domain to the **env\env.local** file.
 1. In the **Provision** dialog, configure the resource group to be used to host the Azure Bot Service:
     1. **Subscription**: Expand the dropdown and select the subscription in the list
@@ -128,7 +135,7 @@ The file contains a single stage called **Provision** which contains several tas
     1. **Region**: Expand the dropdown and select **West US** in the list
     1. Select **Provision**
 1. In the warning prompt, select **Provision**.
-1. Wait for the process to complete. Teams Toolkit will output its progress in the Output pane.
+1. Wait for the process to complete, this can take a 1-3 minutes. Teams Toolkit will output its progress in the Output pane.
 1. In the **Info** prompt, select **View provisioned resources** to open a browser.
 
 Take a minute to examine the Azure Bot Service resource in the Azure Portal.
@@ -260,8 +267,11 @@ Continuing in Visual Studio:
 
 Now let's test our change.
 
-1. To start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
-1. Install and open the app in Microsoft Teams.
+1. To start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar.
+
+Continuing in the web browser:
+
+1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. In the message box, enter +++Hi+++ and send the message. Wait for the response. Notice the change in the response.
 1. In the message box, enter +++Can you help me write a job post for a Senior Developer role?+++ and send the message. Wait for the response.
 
@@ -327,8 +337,11 @@ Continuing in Visual Studio:
 
 Now let's test the change.
 
-1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
-1. Install and open the app in Microsoft Teams.
+1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar.
+
+Continuing in the web browser:
+
+1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. Above the message box, select **View prompts** to open the prompt suggestions flyout.
 1. In the **Prompts** dialog, select one of the prompts. The text is added into the message box.
 
@@ -345,8 +358,6 @@ Continuing in the web browser:
 1. Select **Delete** and confirm the action.
 1. In the Microsoft Teams side bar, select **...** to open the apps flyout.
 1. Select **Custom Engine Agent** to start a new chat. The two UI prompts are shown in the user interface.
-
-==== END OF 441 ====
 
 ## Exercise 4: Message handlers 
 
@@ -433,11 +444,20 @@ Continuing in Visual Studio:
   ```
 
 1. Save your changes.
-1. Open the **env.local.user** file and add a new variable, replacing [INSERT KEY] with the value in [this Github gist](https://aka.ms/Ignite24-Copilot-Agent-Lab-Keys)::
 
-   ```
+In a web browser:
+
+1. In the address bar, type +++https://gist.github.com/garrytrinder/0da49ec4ba50b023e5b75a1c14fa1f22+++ and navigate to a GitHub gist containing environment variables.
+1. Copy the value of the **SECRET_AZURE_SEARCH_KEY** variable to your clipboard.
+
+Continue in Visual Studio:
+
+1. Open the **env.local.user** file and add a new variable, replacing [INSERT KEY] with the value stored in your clipboard.
+
+   ```text
    SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
    ```
+1. Save your changes.
 
 Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our agent code.
 
@@ -609,7 +629,10 @@ Continuing in Visual Studio:
 Now let's test the change.
 
 1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
-1. Install and open the app in Microsoft Teams.
+
+Continuing in the web browser:
+
+1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. Above the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 
 Note that the response contains a reference to a document. The document was used by the language model in it's reasoning when generating an answer and provided as part of the answer. Hover over the reference in the response to view more information about the document.
@@ -775,8 +798,13 @@ builder.Services.AddTransient<IBot>(sp =>
 
 Now let's test the changes.
 
-1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
-1. Install and open the app in Microsoft Teams.
+Continuing in Visual Studio:
+
+1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar.
+
+Continuing in the web browser:
+
+1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Can you suggest a candidate who is suitable for spanish speaking role that requires at least 2 years of .NET experience?+++ and send the message. Wait for the response.
 1. In the repsonse, select either the thumbs up (👍) or thumbs down (👎) icon. A feedback dialog is displayed.
@@ -1299,8 +1327,11 @@ Continuing in Visual Studio:
 
 1. Right-click **TeamsApp** project, expand the **Teams Toolkit** menu and select **Prepare Teams App Dependencies**.
 1. Confirm the prompts and wait till the process completes.
-1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar. 
-1. Install and open the app in Microsoft Teams.
+1. Start a debug session, press <kbd>F5</kbd> on your keyboard, or select the **Start** button in the toolbar.
+
+Continuing in the web browser:
+
+1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. In the message box, enter +++/new+++ and send the message to clear the conversation history and start a new chat.
 1. In the message box, enter +++Physical punishment is a way to correct bad behavior and doesn’t cause harm to children.+++ and send the message. Wait for the response.
 
