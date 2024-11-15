@@ -5,8 +5,66 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Start Teams App Locally",
+            "dependsOn": [
+                "Validate prerequisites",
+                "Start local tunnel",
+                "Start Azurite emulator",
+                "Provision",
+                "Start application"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "Validate prerequisites",
+            "type": "teamsfx",
+            "command": "debug-check-prerequisites",
+            "args": {
+                "prerequisites": [
+                    "nodejs",
+                    "m365Account",
+                    "portOccupancy"
+                ],
+                "portOccupancy": [
+                    7071,
+                    9229
+                ]
+            }
+        },
+        {
+            // Start the local tunnel service to forward public URL to local port and inspect traffic.
+            // See https://aka.ms/teamsfx-tasks/local-tunnel for the detailed args definitions.
+            "label": "Start local tunnel",
+            "type": "teamsfx",
+            "command": "debug-start-local-tunnel",
+            "args": {
+                "type": "dev-tunnel",
+                "ports": [
+                    {
+                        "portNumber": 7071,
+                        "protocol": "http",
+                        "access": "public",
+                        "writeToEnvironmentFile": {
+                            "endpoint": "OPENAPI_SERVER_URL", // output tunnel endpoint as OPENAPI_SERVER_URL
+                        }
+                    }
+                ],
+                "env": "local"
+            },
+            "isBackground": true,
+            "problemMatcher": "$teamsfx-local-tunnel-watch"
+        },
+        {
+            "label": "npm install",
+            "type": "shell",
+            "command": "npm install --no-audit",
+        },
+        {
             "label": "Start Azurite emulator",
             "type": "shell",
+            "dependsOn": [
+                "npm install"
+            ],
             "command": "npm run storage",
             "isBackground": true,
             "problemMatcher": {
@@ -32,70 +90,9 @@
             }
         },
         {
-            "label": "Start Teams App Locally",
-            "dependsOn": [
-                "Validate prerequisites",
-                "Start local tunnel",
-                "Create resources",
-                "Build project",
-                "Start application"
-            ],
-            "dependsOrder": "sequence"
-        },
-        {
-            "label": "Validate prerequisites",
-            "type": "teamsfx",
-            "command": "debug-check-prerequisites",
-            "args": {
-                "prerequisites": [
-                    "nodejs",
-                    "m365Account",
-                    "portOccupancy"
-                ],
-                "portOccupancy": [
-                    7071,
-                    9229
-                ]
-            }
-        },
-        {
-            // Start the local tunnel service to forward public URL to local port and inspect traffic.
-            // See https://aka.ms/teamsfx-tasks/local-tunnel for the detailed args definitions.
-            "label": "Start local tunnel",
-            "dependsOn": [
-                "Start Azurite emulator"
-            ],
-            "type": "teamsfx",
-            "command": "debug-start-local-tunnel",
-            "args": {
-                "type": "dev-tunnel",
-                "ports": [
-                    {
-                        "portNumber": 7071,
-                        "protocol": "http",
-                        "access": "public",
-                        "writeToEnvironmentFile": {
-                            "endpoint": "OPENAPI_SERVER_URL", // output tunnel endpoint as OPENAPI_SERVER_URL
-                        }
-                    }
-                ],
-                "env": "local"
-            },
-            "isBackground": true,
-            "problemMatcher": "$teamsfx-local-tunnel-watch"
-        },
-        {
-            "label": "Create resources",
+            "label": "Provision",
             "type": "teamsfx",
             "command": "provision",
-            "args": {
-                "env": "local"
-            }
-        },
-        {
-            "label": "Build project",
-            "type": "teamsfx",
-            "command": "deploy",
             "args": {
                 "env": "local"
             }
@@ -105,7 +102,7 @@
             "dependsOn": [
                 "Start backend"
             ]
-        },        
+        },
         {
             "label": "Start backend",
             "type": "shell",
@@ -154,6 +151,20 @@
             "presentation": {
                 "reveal": "silent"
             }
+        },
+        {
+            "label": "Terminate All Tasks",
+            "command": "echo ${input:terminate}",
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "terminate",
+            "type": "command",
+            "command": "workbench.action.tasks.terminate",
+            "args": "terminateAll"
         }
     ]
 }
