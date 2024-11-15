@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> ATTENTION TESTERS
+>
+> To speed up testing, you can copy and paste code blocks from instructions on GitHub.
+> Open a browser in the VM and type ++https://github.com/BobGerman/Ignite24-Labs/blob/main/LAB-445/instructions.md++ into the address bar.
+
 @lab.Title
 
 Use this account to log into Windows:
@@ -28,44 +34,50 @@ In the exercises that follow, you will:
  - Add a reference to a SharePoint site containing project documents
  - Add a /projects feature to the API plugin; this will show you all of the relevant packaging files needed to make the API plugin work without asking you to build the whole thing in the limited time of this lab
 
- ## Prerequisite knowledge
+## Prerequisite knowledge
 
- We assume you know the basics of creating and editing files in Visual Studio Code, and how to edit a JSON file. VS code isn't very different from other code editors, but if you have never used any code editor you might need a little help. Also JSON has a lot of squiggly braces, commas, and quotes which need to be exact in order for things to work. If you need help, please raise your hand and a proctor will explain how to compete these tasks. Thanks!
+We assume you know the basics of creating and editing files in Visual Studio Code, and how to edit a JSON file. VS code isn't very different from other code editors, but if you have never used any code editor you might need a little help. Also JSON has a lot of squiggly braces, commas, and quotes which need to be exact in order for things to work. If you need help, please raise your hand and a proctor will explain how to compete these tasks. Thanks!
 
- ## Exercise 1: Run the starting solution
+## Exercise 1: Run the starting solution
 
- ### Step 1: Open the solution in Visual Studio Code with Teams Toolkit
+### Step 1: Open the solution in Visual Studio Code with Teams Toolkit
 
- The starting solution is already in your lab virtual machine at C:\Users\LabUser\TeamsApps\Lab-445.
- Open Visual Studio Code and under the "File" menu, select "Open folder..." and navigate to C:\Users\LabUser\TeamsApps\Lab-445.
+1. Open **Visual Studio Code**
+1. Expand the **File** menu, select **Open folder...**
+1. Navigate to **C:\Users\LabUser\TeamsApps**, select the folder with the name **LAB-445**, and select **Select folder**. Visual Studio Code opens the project in a new window.
 
- Open the Teams Toolkit tab on the left 1️⃣ and under "Accounts", click "Sign in to Microsoft 365" 2️⃣.
+Continuing in the new window:
+
+1. On the **Activity Bar**, select the **Teams Toolkit icon** 1️⃣.
+1. Under **Accounts**, select **Sign in to Microsoft 365** 2️⃣. A browser window is opened.
 
 !IMAGE[01-04-Setup-TTK-01.png](instructions276847/01-04-Setup-TTK-01.png)
 
-Sign in using a "Work and School" account; as a reminder here are your login credentials for the lab tenant:
+Continuing in the web browser:
 
-**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+- Sign in using a "Work and School" account; as a reminder here are your login credentials for the lab tenant:
+    - **Username**: +++@lab.CloudPortalCredential(User1).Username+++
+    - **Password**: +++@lab.CloudPortalCredential(User1).Password+++
 
-**Password: +++@lab.CloudPortalCredential(User1).Password+++**
+Continuing in Visual Studio Code:
 
-Ensure that the "Custom app upload enabled" and "Copilot access enabled" checkboxes are checked (it takes a moment) before proceeding.
+- Ensure that **Custom app upload enabled** and **Copilot access enabled** appear with a green checkbox before continuing.
 
 !IMAGE[run-in-ttk01.png](instructions276847/run-in-ttk01.png)
 
 ### Step 2: Set up the local environment files
 
-Rename the **/env/.env.local.user.sample** to **/env/.env.local.user**. If **.env.local.user** already exists, ensure this line is present:
-
-~~~text
-SECRET_STORAGE_ACCOUNT_CONNECTION_STRING=UseDevelopmentStorage=true
-~~~
+1. In the **Activity Bar**, select the **Explorer** (top) icon to view the files list.
+1. In the env folder, rename **.env.local.user.sample** to **.env.local.user**.
 
 ### Step 3: Test the web service
 
-Press F5 or hover over the "local" environment and click the debugger symbol that will be displayed 1️⃣ and then select "debug in Microsft Edge" 2️⃣.
+- Start a new debug session, press <kbd>F5</kbd> on your keyboard.
 
-!IMAGE[run-in-ttk02.png](instructions276847/run-in-ttk02.png)
+
+<!-- Press F5 or hover over the "local" environment and click the debugger symbol that will be displayed 1️⃣ and then select "debug in Microsft Edge" 2️⃣.
+
+!IMAGE[run-in-ttk02.png](instructions276847/run-in-ttk02.png) -->
 
 It will take a while. If you get an error about not being able to run the "Ensure database" script, please try a 2nd time as this is a timing issue waiting for the Azure storage emulator to run for the first time.
 
@@ -991,4 +1003,3 @@ You have completed Lab 445 and built a Declarative agent with an API plugin.
 If you want to learn more, including how to add API authentication to your project, you can find a deeper dive into this and other examples at [https://aka.ms/copilotdevcamp](https://aka.ms/copilotdevcamp).
 
 What cool prompts can you think of that weren't mentioned in the lab instructions?
-
