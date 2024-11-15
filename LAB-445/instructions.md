@@ -1,6 +1,22 @@
+@lab.Title
+
+Use this account to log into Windows:
+
+**Username: ++@lab.VirtualMachine(Win11-Pro-Base-VM).Username++**
+
+**Password: +++@lab.VirtualMachine(Win11-Pro-Base-VM).Password+++** 
+
+<br>
+
+Use this account to log into Microsoft 365:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
+
 # Lab 445 - Build Declarative Agents for Microsoft 365 Copilot
 
-In this lab you will build a declarative agent that assists employees of a fictitous consulting company called Trey Research. Like all declarative agents, this will use the AI models and orchestration that's built into Microsoft 365 to provide a specialized Copilot experience that focuses on information about consultants, billing, and projects.
+In this lab you will build a declarative agent that assists employees of a fictitous consulting company called Trey Research. Like all declarative agents, this will use the AI model's and orchestration that's built into Microsoft 365 to provide a specialized Copilot experience that focuses on information about consultants, billing, and projects.
 
 To make it easier, we will begin with a working declarative agent and API plugin. These are similar to what you'd get in a new project generated with Teams Toolkit, however there is a working database and sample data to work with.
 
@@ -20,20 +36,26 @@ In the exercises that follow, you will:
 
  ### Step 1: Open the solution in Visual Studio Code with Teams Toolkit
 
- The starting solution is already in your lab virtual machine at %START_LOCATION%.
- Open Visual Studio Code and under the "File" menu, select "Open folder" and navigate to %START_LOCATION%.
+ The starting solution is already in your lab virtual machine at C:\Users\LabUser\TeamsApps\Lab-445.
+ Open Visual Studio Code and under the "File" menu, select "Open folder..." and navigate to C:\Users\LabUser\TeamsApps\Lab-445.
 
  Open the Teams Toolkit tab on the left 1️⃣ and under "Accounts", click "Sign in to Microsoft 365" 2️⃣.
 
- ![Sign into Teams Toolkit](./images/01-04-Setup-TTK-01.png)
+!IMAGE[01-04-Setup-TTK-01.png](instructions276847/01-04-Setup-TTK-01.png)
 
-You may be asked to set up multi-factor authentication (MFA) at this point; if so, follow the steps as prompted until you are able to log in. Ensure that the "Custom app upload enabled" and "Copilot access enabled" checkboxes are checked (it takes a moment) before proceeding.
+Sign in using a "Work and School" account; as a reminder here are your login credentials for the lab tenant:
 
- ![Check services are enabled](./images/run-in-ttk01.png)
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
+
+Ensure that the "Custom app upload enabled" and "Copilot access enabled" checkboxes are checked (it takes a moment) before proceeding.
+
+!IMAGE[run-in-ttk01.png](instructions276847/run-in-ttk01.png)
 
 ### Step 2: Set up the local environment files
 
-Copy the **/env/.env.local.user** sample to **/env/.env.local.user**. If **.env.local.user** already exists, ensure this line is present:
+Rename the **/env/.env.local.user.sample** to **/env/.env.local.user**. If **.env.local.user** already exists, ensure this line is present:
 
 ~~~text
 SECRET_STORAGE_ACCOUNT_CONNECTION_STRING=UseDevelopmentStorage=true
@@ -43,11 +65,17 @@ SECRET_STORAGE_ACCOUNT_CONNECTION_STRING=UseDevelopmentStorage=true
 
 Press F5 or hover over the "local" environment and click the debugger symbol that will be displayed 1️⃣ and then select "debug in Microsft Edge" 2️⃣.
 
-![Start debugger](./images/run-in-ttk02.png)
+!IMAGE[run-in-ttk02.png](instructions276847/run-in-ttk02.png)
 
 It will take a while. If you get an error about not being able to run the "Ensure database" script, please try a 2nd time as this is a timing issue waiting for the Azure storage emulator to run for the first time.
 
 The Edge browser should open to the Copilot "Bizchat" page.
+
+If you are prompted to log in, choose "work and school" account and use these credentials:
+
+**Username: +++@lab.CloudPortalCredential(User1).Username+++**
+
+**Password: +++@lab.CloudPortalCredential(User1).Password+++**
 
 Minimize the browser so you can test the API locally. (Don't close the browser or you will exit the debug session!)
 
@@ -57,11 +85,11 @@ Before proceeding, ensure the log file is in view by opening the "Debug console"
 
 Now click the "Send Request" link in treyResearchAAPI.http just above the link {{base_url}}/me 6️⃣.
 
-![Test the /me API call](./images/run-in-ttk04.png)
+!IMAGE[run-in-ttk04.png](instructions276847/run-in-ttk04.png)
 
 You should see the response in the right panel, and a log of the request in the bottom panel. The response shows the information about the logged-in user, but since we haven't implemented authentication as yet (that's coming in Lab 6), the app will return information on the fictitious consultant "Avery Howard". Take a moment to scroll through the response to see details about Avery, including a list of project assignments.
 
-![View API results](./images/run-in-ttk05.png)
+!IMAGE[run-in-ttk05.png](instructions276847/run-in-ttk05.png)
 
 Try some more API calls to familiarize yourself with the API and the data.
 
@@ -71,7 +99,7 @@ Now restore the browser window you minimized in Step 3. You should see the Micro
 
 Open the right flyout 1️⃣ and, if necessary, click "Show more"2️⃣ to reveal all the choices. Then choose "Trey Genie local"3️⃣, which is the agent you just installed.
 
-![Open the declarative agent](./images/run-declarative-copilot-01.png)
+!IMAGE[run-declarative-copilot-01.png](instructions276847/run-declarative-copilot-01.png)
 
 Try one of the prompt suggestions such as, "Find consultants with TypeScript skills." You should see two consultants, Avery Howard and Sanjay Puranik, with additional details from the database.
 
@@ -86,7 +114,7 @@ Your log file should reflect the request that Copilot made. You might want to tr
 
  In this exercise you'll update your declarative agent with more instructions and add the capability to include knowledge from a SharePoint site.
  
- ### Step 1: Add instructions
+### Step 1: Add instructions
 
 Open in the **appPackage** folder open **trey-declarative-agent.json**. Add some text to the `"instructions"` value, staying on one line and between the quotation marks:
 
@@ -94,11 +122,11 @@ Open in the **appPackage** folder open **trey-declarative-agent.json**. Add some
 Be sure to remind users of the Trey motto, 'Always be Billing!'.
 ~~~
 
- ### Step 2: Inspect the SharePoint site
+### Step 2: Inspect the SharePoint site
 
-In a web browser, open the site %SHAREPOINT_URL%. You may need to log in again. When you see the site home page, click on "Documents" to view the Trey Research legal documents. Notice that it contains contracts for two consulting engagements, Bellows College and Woodgrove Bank.
+In a web browser, open the site https://lodsprodmca.sharepoint.com/sites/TreyLegalDocuments. You may need to log in again. When you see the site home page, click on "Documents" to view the Trey Research legal documents. Notice that it contains contracts for two consulting engagements, Bellows College and Woodgrove Bank.
 
-![SharePoint files](./images/sharepoint-docs.png)
+!IMAGE[sharepoint-docs.png](instructions276847/sharepoint-docs.png)
 
 ### Step 3: Add the SharePoint capability
 
@@ -110,7 +138,7 @@ Now return to the **trey-declarative-agent.json** file and add these lines just 
         "name": "OneDriveAndSharePoint",
         "items_by_url": [
             {
-                "url": "%SHAREPOINT_URL%"
+                "url": "https://lodsprodmca.sharepoint.com/sites/TreyLegalDocuments"
             }
         ]
     }
@@ -145,7 +173,7 @@ The final **trey-declarative-agent.json** file should look like this:
             "name": "OneDriveAndSharePoint",
             "items_by_url": [
                 {
-                    "url": "%SHAREPOINT_URL%"
+                    "url": "https://lodsprodmca.sharepoint.com/sites/TreyLegalDocuments"
                 }
             ]
         }
@@ -158,6 +186,16 @@ The final **trey-declarative-agent.json** file should look like this:
     ]
 }
 ~~~
+
+NOTE: The completed solution can be found in C:\Users\LabUser\TeamsApps\LAB-445-END on your workstation if you want to copy or compare with the final source code.
+
+#### Step W: Workaround for issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.dev** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
 
 ### Step 4: Test in Copilot
 
@@ -571,7 +609,7 @@ Now at the end of the same file, add these lines:
 }
 ~~~
 
-Be sure to check your nesting on the brackets as it gets a little tricky with large JSON files! For your reference the finished file is at **%END_LOCATION%\appPackage\trey-definition.json**.
+Be sure to check your nesting on the brackets as it gets a little tricky with large JSON files! For your reference the finished file is at **C:\Users\LabUser\TeamsApps\Lab-445-Completed\appPackage\trey-definition.json**.
 
 ### Step 4: Add the projects information to your API plugin file
 
@@ -913,7 +951,15 @@ Paste this above the closing bracket, including the comma which closes the `"cha
 }
 ~~~
 
-Again, please double check your nesting and commas as editing large JSON files can be tricky! The correctly modified file is on your lab workstation in **%END_LOCATION%\appPackage/trey-plugin.json**.
+Again, please double check your nesting and commas as editing large JSON files can be tricky! The correctly modified file is on your lab workstation in **C:\Users\LabUser\TeamsApps\Lab-445-Completed\appPackage/trey-plugin.json**.
+
+#### Step W: Workaround for issue updating DA's with SharePoint URL'sfor issue updating DA's with SharePoint URL's
+
+By the time you do this lab, this might be unnecessary, but at the time of this writing there is a platform bug where updates to Declarative Agents containing SharePoint capabilities do not take effect in a timely manner. To work around this, you can simply create a new application instead of updating the old one.
+
+First, in Visual Studio code open the **env\\.env.local** file and delete everything. This will force Teams Toolkit to make a new application.
+
+Second, in your **declarativeAgent.json** file, add a number to the name such as "Product Support 2", as you will see two copies of the agent in Copilot. Then test by clicking on the one with a new name.
 
 ### Step 5: Test the API
 
@@ -934,6 +980,15 @@ You should get back ten projects.
 With the debugger still running, restore your debug browser session. Open Copilot and the Trey Genie declarative agent.
 Here are a couple of prompts to try:
 
-* "What projects is Trey Resarch working on now?" (should return all the projects)
-* "Please add Domi as a designer on the Contoso project. Forecast 30 hours for her work." (should show a confirmation card, then add Domi to the project)
-* "What projects is Domi working on?" (should now include the Contoso project).
+* +++What projects is Trey Resarch working on now?+++ (should return all the projects)
+* +++Please add Domi as a designer on the Contoso project. Forecast 30 hours for her work.+++ (should show a confirmation card, then add Domi to the project)
+* +++What projects is Domi working on?+++ (should now include the Contoso project).
+
+# Congratulations!
+
+---
+You have completed Lab 445 and built a Declarative agent with an API plugin.
+If you want to learn more, including how to add API authentication to your project, you can find a deeper dive into this and other examples at [https://aka.ms/copilotdevcamp](https://aka.ms/copilotdevcamp).
+
+What cool prompts can you think of that weren't mentioned in the lab instructions?
+
