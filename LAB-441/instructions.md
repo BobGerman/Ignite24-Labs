@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> ATTENTION TESTERS
+>
+> To speed up testing, you can copy and paste code blocks from instructions on GitHub.
+> Open a browser in the VM and type ++https://github.com/BobGerman/Ignite24-Labs/blob/main/LAB-441/instructions.md++ into the address bar.
+
 @lab.Title
 
 Login to your VM with the following credentials...
@@ -20,10 +26,10 @@ Use this account to log into Microsoft 365:
 
 In this lab you create a declarative agent for Microsoft 365 which can answer product support questions using information stored in documents in Microsoft 365. You will learn how to:
 
-- **Create** a declarative agent using Teams Toolkit in Visual Studio Code
-- **Add custom instructions** to shape responses
-- **Add knowledge** by configuring the agent's grounding data to include SharePoint documents
-- **Add conversation starters** so Copilot can suggest prompts to help users get started
+- **Create** a declarative agent using Teams Toolkit in Visual Studio Code.
+- **Add custom instructions** to shape responses.
+- **Add knowledge** by configuring the agent's grounding data to include SharePoint documents.
+- **Add conversation starters** so Copilot can suggest prompts to help users get started.
 - **Provision** your declarative agent to Microsoft 365 Copilot and validate the results.
 
 ## Example scenario
