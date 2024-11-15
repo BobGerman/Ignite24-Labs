@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> ATTENTION TESTERS
+>
+> To speed up testing, you can copy and paste code blocks from instructions on GitHub.
+> Open a browser in the VM and type ++https://github.com/BobGerman/Ignite24-Labs/blob/main/LAB-446/instructions.md++ into the address bar.
+
 @lab.Title
 
 Login to your VM with the following credentials...
@@ -114,11 +120,11 @@ Continue in Visual Studio:
 
 The file contains a single stage called **Provision** which contains several tasks.
 
-1. **teamsApp/create**: Registers an app in Teams Developer Portal and writes the app ID to **env\env.local**.
-1. **aadApp/create**: Registers an app in Microsoft Entra and writes several values to **env\env.local**.
+1. **teamsApp/create**: Registers an app in Teams Developer Portal and writes the app ID to **env\.env.local**.
+1. **aadApp/create**: Registers an app in Microsoft Entra and writes several values to **env\.env.local**.
 1. **aadApp/update**: Applies an app manifest to the Microsoft Entra app registration.
-1. **arm/deploy**: Provisions the Azure Bot Service using Bicep. It writes several values back to **env\env.local**.
-1. **file/createOrUpdateJsonFile**: Updates appsettings.development.json file with environment variables which can be used by code at runtime.
+1. **arm/deploy**: Provisions the Azure Bot Service using Bicep. It writes several values back to **env\.env.local**.
+1. **file/createOrUpdateJsonFile**: Updates **appsettings.development.json** file with environment variables which can be used by code at runtime.
 1. **teamsApp/validateManifest**: Validates the app manifest file.
 1. **teamsApp/zipAppPackage**: Creates the Teams app package.
 1. **teamsApp/validateAppPackage**: Validates the app package.
@@ -230,7 +236,7 @@ The key elements of the agent setup are:
 
 - **ILoggerFactory**: Used for logging messages to the output pane for debugging.
 - **PromptManager**: Determines the location of prompt templates.
-- **ActionPlanner**: Determines which model and prompt should be used when handling a user message. By default, the planner uses a prompt template named 'Chat'.
+- **ActionPlanner**: Determines which model and prompt should be used when handling a user message. By default, the planner uses a prompt template named **Chat**.
 - **ApplicationBuilder**: Creates an object which represents a Bot that can handle incoming activities.
 
 The agent is added as a transient service which means that everytime a message is recieved from the Bot Framework, our agent code will be executed.
@@ -296,35 +302,57 @@ Continuing in Visual Studio:
 1. In the **appPackage** folder, open the **manifest.json** file.
 1. In the **bots** array property, expand the first object with a **commandLists** array property.
 
-    ```
-    "bots": [
+    ```json
+    "commandLists": [
       {
-        "botId": "${{BOT_ID}}",
         "scopes": [
           "personal"
         ],
-        "supportsFiles": false,
-        "isNotificationOnly": false,
-        "commandLists": [
+        "commands": [
           {
-             "scopes": [
-               "personal"
-             ],
-             "commands": [
-               {
-                 "title": "Write a job post for <role>",
-                 "description": "Generate a job posting for a specific role"
-               },
-               {
-                 "title": "Skill required for <role>",
-                 "description": "Identify skills required for a specific role"
-               }
-            ]
+            "title": "Write a job post for <role>",
+            "description": "Generate a job posting for a specific role"
+          },
+          {
+            "title": "Skill required for <role>",
+            "description": "Identify skills required for a specific role"
           }
         ]
       }
-    ],
+    ]
     ```
+
+The **bots** array property should look like:
+
+```json
+"bots": [
+  {
+    "botId": "${{BOT_ID}}",
+    "scopes": [
+      "personal"
+    ],
+    "supportsFiles": false,
+    "isNotificationOnly": false,
+    "commandLists": [
+      {
+        "scopes": [
+          "personal"
+        ],
+        "commands": [
+          {
+            "title": "Write a job post for <role>",
+            "description": "Generate a job posting for a specific role"
+          },
+          {
+            "title": "Skill required for <role>",
+            "description": "Identify skills required for a specific role"
+          }
+        ]
+      }
+    ]
+  }
+],
+```
 
 ### Step 2: Test suggested prompts
 
@@ -344,9 +372,6 @@ Continuing in the web browser:
 1. In the app dialog, select **Open** to open the agent in Microsoft Teams.
 1. Above the message box, select **View prompts** to open the prompt suggestions flyout.
 1. In the **Prompts** dialog, select one of the prompts. The text is added into the message box.
-
-![View prompts](./images/lab441-view-prompts.png)
-
 1. In the message box, replace **<role>** with a job title, for example, +++Senior Software Engineer+++, and send the message.
 
 The prompt suggestions can also be seen when the user opens the agent for the first time.
@@ -357,7 +382,7 @@ Continuing in the web browser:
 1. Find the chat with the name **Custom Engine Agent** in the list and select the **...** menu.
 1. Select **Delete** and confirm the action.
 1. In the Microsoft Teams side bar, select **...** to open the apps flyout.
-1. Select **Custom Engine Agent** to start a new chat. The two UI prompts are shown in the user interface.
+1. Select **Custom Engine Agent** to start a new chat. The two suggested prompts are shown in the user interface.
 
 ## Exercise 4: Message handlers 
 
@@ -368,7 +393,6 @@ Up to this point, every time you send and recieve a message the contents of the 
 > [!NOTE]
 > Message handlers are processed before the ActionPlanner and so take priority for handling the response.
  
-
 Here, you'll create a message handler that will clear the conversation history stored in the agent state when a message that contains **/new** is sent, and respond with a fixed message.
 
 ## Step 1: Create message handler
@@ -395,11 +419,51 @@ Continuing in Visual Studio:
 
 ## Step 2: Register message handler
 
-1. Open **Program.cs**, add the following code after **app** variable declaration: 
+1. Open **Program.cs**, in the agent code, add the following code after the **app** declaration :
 
   ```csharp
   app.OnMessage("/new", MessageHandlers.NewChat);
   ```
+
+The agent code should look like:
+
+```csharp
+builder.Services.AddTransient<IBot>(sp =>
+{
+    // Create loggers
+    ILoggerFactory loggerFactory = sp.GetService<ILoggerFactory>();
+
+    // Create Prompt Manager
+    PromptManager prompts = new(new()
+    {
+        PromptFolder = "./Prompts"
+    });
+
+    // Create ActionPlanner
+    ActionPlanner<TurnState> planner = new(
+        options: new(
+            model: sp.GetService<OpenAIModel>(),
+            prompts: prompts,
+            defaultPrompt: async (context, state, planner) =>
+            {
+                PromptTemplate template = prompts.GetPrompt("Chat");
+                return await Task.FromResult(template);
+            }
+        )
+        { LogRepairs = true },
+        loggerFactory: loggerFactory
+    );
+
+    Application<TurnState> app = new ApplicationBuilder<TurnState>()
+        .WithAIOptions(new(planner))
+        .WithStorage(sp.GetService<IStorage>())
+        .Build();
+
+    app.OnMessage("/new", MessageHandlers.NewChat);
+
+    return app;
+});
+```
 
 ## Step 3: Run and debug
 
@@ -435,10 +499,9 @@ First, let's create some environment varibles to store details that we will need
 Continuing in Visual Studio:
 
 1. In the **TeamApp** project, expand the **env** folder.
-1. Open the **env.local** file and add the following:
+1. Open the **.env.local** file and add the following environment variables:
   
   ```
-  AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME=text-embedding-ada-002
   AZURE_SEARCH_ENDPOINT=https://aais-ignite-2024-labs.search.windows.net
   AZURE_SEARCH_INDEX_NAME=documents
   ```
@@ -452,58 +515,76 @@ In a web browser:
 
 Continue in Visual Studio:
 
-1. Open the **env.local.user** file and add a new variable, replacing [INSERT KEY] with the value stored in your clipboard.
+1. In the **TeamApp** project, expand the **env** folder.
+1. Open the **.env.local.user** file and add a new environment variable, replacing [INSERT KEY] with the value stored in your clipboard.
 
    ```text
    SECRET_AZURE_SEARCH_KEY=[INSERT KEY]
    ```
+
 1. Save your changes.
 
 Next, let's make sure that these value are written to the **appsettings.development.json** file so we can access them at runtime in our agent code.
 
 1. In the **Custom.Engine.Agent** project, open **teamsapp.local.yml** file.
-1. Update the **file/createOrUpdateJsonFile** action:
+1. Update the **file/createOrUpdateJsonFile** action with the new environment variables:
 
-  ```yaml
-    - uses: file/createOrUpdateJsonFile
-      with:
-        target: ../Custom.Engine.Agent/appsettings.Development.json
-        content:
-          BOT_ID: ${{BOT_ID}}
-          BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
-          AZURE_OPENAI_DEPLOYMENT_NAME: ${{AZURE_OPENAI_DEPLOYMENT_NAME}}
-          AZURE_OPENAI_KEY: ${{SECRET_AZURE_OPENAI_API_KEY}}
-          AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
-          AZURE_STORAGE_CONNECTION_STRING: UseDevelopmentStorage=true
-          AZURE_STORAGE_BLOB_CONTAINER_NAME: state
-          AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
-          AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
-          AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
-  ```
+    ```yaml
+    AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
+    AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
+    AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
+    ```
 
 1. Save your changes.
+
+The **file/createOrUpdateJsonFile** should look like:
+
+```yaml
+    - uses: file/createOrUpdateJsonFile
+        with:
+        target: ../Custom.Engine.Agent/appsettings.Development.json
+        content:
+            BOT_ID: ${{BOT_ID}}
+            BOT_PASSWORD: ${{SECRET_BOT_PASSWORD}}
+            AZURE_OPENAI_DEPLOYMENT_NAME: ${{AZURE_OPENAI_DEPLOYMENT_NAME}}
+            AZURE_OPENAI_KEY: ${{SECRET_AZURE_OPENAI_API_KEY}}
+            AZURE_OPENAI_ENDPOINT: ${{AZURE_OPENAI_ENDPOINT}}
+            AZURE_STORAGE_CONNECTION_STRING: UseDevelopmentStorage=true
+            AZURE_STORAGE_BLOB_CONTAINER_NAME: state
+            AZURE_SEARCH_ENDPOINT: ${{AZURE_SEARCH_ENDPOINT}}
+            AZURE_SEARCH_INDEX_NAME: ${{AZURE_SEARCH_INDEX_NAME}}
+            AZURE_SEARCH_KEY: ${{SECRET_AZURE_SEARCH_KEY}}
+```
 
 Now, extend the model so we can easily access the new environment variable values in code.
 
-1. Open **Config.cs**, update the **ConfigOptions** class with the following:
+1. Open **Config.cs**, update the **ConfigOptions** class, add the following properties:
 
-  ```csharp
-  public class ConfigOptions
-  {
-      public string BOT_ID { get; set; }
-      public string BOT_PASSWORD { get; set; }
-      public string AZURE_OPENAI_KEY { get; set; }
-      public string AZURE_OPENAI_ENDPOINT { get; set; }
-      public string AZURE_OPENAI_DEPLOYMENT_NAME { get; set; }
-      public string AZURE_STORAGE_CONNECTION_STRING { get; set; }
-      public string AZURE_STORAGE_BLOB_CONTAINER_NAME { get; set; }
-      public string AZURE_SEARCH_ENDPOINT { get; set; }                  
-      public string AZURE_SEARCH_INDEX_NAME { get; set; }                
-      public string AZURE_SEARCH_KEY { get; set; }
-  }
-  ```
+    ```csharp
+    public string AZURE_SEARCH_ENDPOINT { get; set; }                  
+    public string AZURE_SEARCH_INDEX_NAME { get; set; }                
+    public string AZURE_SEARCH_KEY { get; set; }
+    ```
 
 1. Save your changes.
+
+The **ConfigOptions** class should look like:
+
+```csharp
+public class ConfigOptions
+{
+    public string BOT_ID { get; set; }
+    public string BOT_PASSWORD { get; set; }
+    public string AZURE_OPENAI_KEY { get; set; }
+    public string AZURE_OPENAI_ENDPOINT { get; set; }
+    public string AZURE_OPENAI_DEPLOYMENT_NAME { get; set; }
+    public string AZURE_STORAGE_CONNECTION_STRING { get; set; }
+    public string AZURE_STORAGE_BLOB_CONTAINER_NAME { get; set; }
+    public string AZURE_SEARCH_ENDPOINT { get; set; }                  
+    public string AZURE_SEARCH_INDEX_NAME { get; set; }                
+    public string AZURE_SEARCH_KEY { get; set; }
+}
+```
 
 ### Step 2: Integrate Azure AI Search in prompt template configration
 
@@ -563,43 +644,70 @@ Notice that we use placeholders as values for some properties, for example **$az
 Continuing in Visual Studio:
 
 1. Open **Program.cs** file.
-1. Update the **defaultPrompt** anonymouse function to dynamically replace the placeholders in the prompt template configuration with the values we stored in our environment variable files earlier.
+1. Replace the contents of the **defaultPrompt** function to dynamically replace the placeholders in the prompt template configuration with the values we stored in our environment variable files earlier.
 
-  ```csharp
-  ActionPlanner<TurnState> planner = new(
-      options: new(
-          model: sp.GetService<OpenAIModel>(),
-          prompts: prompts,
-          defaultPrompt: async (context, state, planner) =>
-          {
-              PromptTemplate template = prompts.GetPrompt("Chat");
+    ```csharp
+    PromptTemplate template = prompts.GetPrompt("Chat");
 
-              var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
-              var dataSourcesString = JsonSerializer.Serialize(dataSources);
+    var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
+    var dataSourcesString = JsonSerializer.Serialize(dataSources);
 
-              var replacements = new Dictionary<string, string>
-              {
-                  { "$azure-search-key$", config.AZURE_SEARCH_KEY },
-                  { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
-                  { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
-              };
+    var replacements = new Dictionary<string, string>
+    {
+        { "$azure-search-key$", config.AZURE_SEARCH_KEY },
+        { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
+        { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
+    };
 
-              foreach (var replacement in replacements)
-              {
-                  dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
-              }
+    foreach (var replacement in replacements)
+    {
+        dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
+    }
 
-              dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
-              template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
+    dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
+    template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
 
-              return await Task.FromResult(template);
-          }
-      )
-      { LogRepairs = true },
-      loggerFactory: loggerFactory
-  );
-  ```
+    return await Task.FromResult(template);
+    ```
+
 1. Save your changes.
+
+The **ActionPlanner** object should look like:
+
+```csharp
+ActionPlanner<TurnState> planner = new(
+    options: new(
+        model: sp.GetService<OpenAIModel>(),
+        prompts: prompts,
+        defaultPrompt: async (context, state, planner) =>
+        {
+            PromptTemplate template = prompts.GetPrompt("Chat");
+
+            var dataSources = template.Configuration.Completion.AdditionalData["data_sources"];
+            var dataSourcesString = JsonSerializer.Serialize(dataSources);
+
+            var replacements = new Dictionary<string, string>
+            {
+                { "$azure-search-key$", config.AZURE_SEARCH_KEY },
+                { "$azure-search-index-name$", config.AZURE_SEARCH_INDEX_NAME },
+                { "$azure-search-endpoint$", config.AZURE_SEARCH_ENDPOINT },
+            };
+
+            foreach (var replacement in replacements)
+            {
+                dataSourcesString = dataSourcesString.Replace(replacement.Key, replacement.Value);
+            }
+
+            dataSources = JsonSerializer.Deserialize<JsonElement>(dataSourcesString);
+            template.Configuration.Completion.AdditionalData["data_sources"] = dataSources;
+
+            return await Task.FromResult(template);
+        }
+    )
+    { LogRepairs = true },
+    loggerFactory: loggerFactory
+);
+```
 
 The **defaultPrompt** anonymous function provides a way to dyanmically alter the behaviour of our agent. This is where you can include logic to choose different prompt templates for different functions or behaviours that you want the agent to provide. Suppose you want to dynamically adjust the temperature or choose a different prompt template based in a specific input. Here is where you would add the logic to make those changes on the fly.
 
@@ -607,7 +715,8 @@ The **defaultPrompt** anonymous function provides a way to dyanmically alter the
 
 Now, update the prompt text to reflect the change in agent behaviour.
 
-1. Update prompt
+1. In the **Custom.Engine.Agent** project, expand the **Prompts** folder, then expand the **chat** folder.
+1. Open the **skprompt.txt** file, then replace the contents with the following:
 
     ```text
     You are a career specialist named "Career Genie" that helps Human Resources team for finding the right candidate for the jobs. 
